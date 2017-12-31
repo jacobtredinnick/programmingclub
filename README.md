@@ -12,14 +12,14 @@ Important requirements for the language choice in this situation were:
 * The language should not be overly complex at it's introductory level
 * Yet it should still be relevant to modern-day programming languages & software development
 
-Based on this, I selected [Processing](https://processing.org/), which (as I understand it) aims to meet the aims above within the context of visual arts.  IMHO I felt that this environment also met the needs of my pupils - for example the "Hello World" in Processing is a one-liner allowing the user to display some sort of graphics & with a few more lines we can add some simple animation which is very appealing to youngsters trying to code for the first time!
+Based on this, I selected [Processing](https://processing.org/), which (as I understand it) aims to meet the aims above within the context of visual arts.  IMHO I felt that this environment also met the needs of my club - for example the "Hello World" in Processing is a one-liner allowing the user to display some sort of graphics & with a few more lines we can add some simple animation which is very appealing to youngsters trying to code for the first time!
 
 Since writing the course content I'm sure that other languages have moved on, as has Processing.  At the time I was using Processing 2 and I haven't tested any of the content with Processing 3.
 
 Note: Most of the content so far is based on Processing but there are a couple of "Challenges" using HTML, CSS and some rudimentary JavaScript.
 
 ## Website - Static HTML
-The format of the course was to deploy a simple, static HTML website on the school's internal network.  The website is rudimentary and I've no doubt that the content could be made a lot more appealing (and a little less 90s-looking :wink:) with a little effort!
+The format of the course was to deploy a simple, static HTML website on the school's internal network.  The website is rudimentary and I've no doubt that the content could be made a lot more appealing (and less 90s-looking :wink:) with a little effort!
 
 ## How the sessions were run
 Just in case anyone happens across this or is thinking of setting up something similar, this is how I ran the club:
@@ -30,4 +30,10 @@ Just in case anyone happens across this or is thinking of setting up something s
 * Students were encouraged to tinker with the solutions and try to make something fun!
 
 ## How to deploy the website
-I'll update this section once I've committed the code & website samples...
+**NOTE: Instructions not yet tested**
+For now I have simply uploaded the code samples and static website in the state that they were when I last ran the club.
+These instructions **should** work but I haven't actually tested them yet!
+
+After cloning the repository just copy all of the content (except the .git directory) to a directory called "programmingclub" that should be placed below the content root of your web server. 
+
+I hope to be able to test & publish better instructions soon...
