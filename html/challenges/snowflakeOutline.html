@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Snowflake Outline</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Snowflake Outline</h1>
+		<h3>Objective</h3>
+		<p><b>Draw a snowflake outline using trigonometry functions</b></p>
+
+		<li><b>Easy:</b> Start with a circle</li><p></p>
+		<img src="/programmingclub/img/snowflakeOutlineEasy.png"/><p></p>
+		<li><b>Medium:</b> Draw some long lines</li><p></p>
+		<img src="/programmingclub/img/snowflakeOutlineMedium.png"/><p></p>
+		<li><b>Hard:</b> Draw some short lines between the long lines</li><p></p>
+		<img src="/programmingclub/img/snowflakeOutlineHard.png"/><p></p>
+		<h3>Tools</h3>
+		<p>
+		<p>The <a href="/programmingclub/examples/snowflakeOutlineStarterProgram/snowflakeOutlineStarterProgram.txt">
+		starter</a> program defines a Snowflake type.  You will have to draw it.</p>
+		<h4>Easy Challenge hints</h4>
+		Draw a circle in the Snowflake.draw() method using the ellipse() function with the data contained in the snowflake: x, y, innerRadius:
+		<pre><code><b>
+class Snowflake {
+  // configurable
+  float x;
+  float y;
+  float innerRadius;
+  ...  
+  void draw()
+  {
+    // get ready to draw
+    stroke(flakeColor);
+    strokeWeight(innerRadius/10);
+    noFill();
+  
+    // draw the inner circle using the ellipse function
+    <font color="green">... you will have to call the ellipse() function here with the right parameters ...</font>
+  }
+		</pre></code></b>
+		<h4>Medium Challenge hints</h4>
+		Draw six long lines and six small lines around edge of the circle:
+		To do this it will be easiest to use some <b>trigonomery</b> (sorry if you've not yet done this in maths!):<p></p>
+		<img src="/programmingclub/img/circleGeometry.png"/><p></p>
+		Think of the snowflake outline contained within various circles.
+		The points on the edges of the circles are based on the sin or cos functions multiplied by the radius of the circle you are thinking about...<br>
+		
+		You will need a loop something like this in the Snowflake.draw() method:
+		<pre><code><b>
+    // draw the 6 long lines
+    for (int i = 0; i < 6; ++i) {
+      // work out where to draw the line
+      // who has done trigonometry in maths then?
+      float r = i * TWO_PI/6; // radians - need to use these for sin & cos to work properly, a full circle is TWO_PI radians
+      float s = sin(r);
+      float c = cos(r);
+      float x0 = <font color="green">...x positon on inner snowflake circle (innerRadius)...</font>
+      float y0 = <font color="green">...y positon on inner snowflake circle (innerRadius)...</font>
+      float x1 = <font color="green">...x positon on outer snowflake circle (outerRadius)...</font>
+      float y1 = <font color="green">...y positon on outer snowflake circle (outerRadius is already stored)...</font>
+      
+      // draw the line
+      line(x0, y0, x1, y1);
+    }
+		</pre></code></b>
+
+		<h4>Hard Challenge hints</h4>
+		This is not that hard if you can do the medium challenge.  Just some more trigonometry with slightly different angles.
+		</body>
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<li>Easy challenge <a href="/programmingclub/solutions/snowflakeOutlineEasy/snowflakeOutlineEasy.txt">solution</a></li>
+		<li>Medium challenge <a href="/programmingclub/solutions/snowflakeOutlineMedium/snowflakeOutlineMedium.txt">solution</a></li>
+		<li>Hard challenge <a href="/programmingclub/solutions/snowflakeOutlineHard/snowflakeOutlineHard.txt">solution</a></li>
+		</div>
+</html>

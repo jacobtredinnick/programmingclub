@@ -1,0 +1,88 @@
+int SCREEN_WIDTH=800;
+int SCREEN_HEIGHT=600;
+
+float SNAKE_VELOCITY = 5;
+float SNAKE_SEGMENT_SIZE = 20;
+
+final int DIRECTION_UP = 0;
+final int DIRECTION_DOWN = 1;
+final int DIRECTION_LEFT = 2;
+final int DIRECTION_RIGHT = 3;
+
+Snake snake;
+
+void setup()
+{
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  smooth();
+
+  snake = new Snake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+}
+
+void draw()
+{
+  if (!snake.isContainedIn(0,0, SCREEN_WIDTH, SCREEN_HEIGHT)) {
+    return; // freeze the game when the "snake" hits the edge
+  }
+  
+  drawBackground();
+  snake.draw();
+}
+
+void drawBackground()
+{
+  background(0);
+}
+
+void keyPressed()
+{
+  if (keyCode == LEFT) snake.updateDirection(DIRECTION_LEFT);
+  else if (keyCode == RIGHT) snake.updateDirection(DIRECTION_RIGHT);
+  else if (keyCode == UP) snake.updateDirection(DIRECTION_UP);
+  else if (keyCode == DOWN) snake.updateDirection(DIRECTION_DOWN);
+}
+
+class Snake {
+  float x;
+  float y;
+  int direction = DIRECTION_RIGHT;
+  
+  Snake(float x, float y)
+  {
+    this.x = x;
+    this.y = y;
+  }
+  
+  void draw()
+  {
+    // just the head for now
+    drawHead();
+    updatePosition();
+  }
+
+  void updateDirection(int d)
+  {
+    direction = d;
+  }
+
+  void updatePosition()
+  {
+   if (direction == DIRECTION_LEFT) x -= SNAKE_VELOCITY;
+   else if (direction == DIRECTION_RIGHT) x += SNAKE_VELOCITY;
+   else if (direction == DIRECTION_UP) y -= SNAKE_VELOCITY;
+   else if (direction == DIRECTION_DOWN) y += SNAKE_VELOCITY; // remember down is positive in computer graphics
+  }
+
+  void drawHead()
+  {
+    fill(255,0,0);
+    ellipse(x,y,SNAKE_SEGMENT_SIZE,SNAKE_SEGMENT_SIZE);
+  }
+  
+  boolean isContainedIn(float x0, float y0, float x1, float y1)
+  {
+    float d = SNAKE_SEGMENT_SIZE/2; // account for segment size
+    return (x >= x0 + d && x <= x1 -d && y >= y0+d && y <= y1 -d);
+  }
+}
+

@@ -1,0 +1,112 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Hello Processing</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Hello Processing</h1>
+
+		<h3>Task</h3>
+		<p>
+		<b>Write a program that shows "Hello Processing" in a window like this:</b><p></p>
+		<img src="/programmingclub/img/helloProcessing.png"/>
+		</p>
+
+		<h3>Objective</h3>
+		<p><b>Draw your first graphics</b></p>
+		We will be learning most of our programming using simple graphics and Processing helps make this easy.
+
+		<h3>Tools</h3>
+		<li>The <b>sketch window</b> is the little grey window that we have ignored up till now.  This is where we will draw graphics:</li><p></p>
+		<img src="/programmingclub/img/helloProcessing.sketchWindow.png"/><p></p>
+		<li>The <b><a href="http://processing.org/reference/size_.html">size()</a></b> function changes the size of the sketch window:</li>
+		<pre><code><b>
+// make the sketch window 600 pixels wide by 400 pixels high
+// default is 100x100
+size(600,400);
+		</pre></code></b>
+		<img src="/programmingclub/img/helloProcessing.sketchWindow.sized.png"/><p></p>
+		
+		<li>The <b><a href="http://processing.org/reference/background_.html">background()</a></b> function changes the background colour of the sketch window:</li>
+		<pre><code><b>
+// make the sketch window background black (0 means black here)
+// Follow the <a href="http://processing.org/learning/color/">colour tutorial</a> to learn more about color codes
+background(0);
+		</pre></code></b>
+		<img src="/programmingclub/img/helloProcessing.sketchWindow.black.png"/><p></p>
+
+		<li>The <b><a href="http://processing.org/reference/rect_.html">rect()</a></b> function draws a rectangle:</li>
+		<pre><code><b>
+// draw a rectangle with top left corner at (10,10), width 50, height 100
+// computer graphics start with (0,0) at the <b>top left</b> (try a few different numbers and see what happens)
+// read the <a href="http://processing.org/learning/drawing/">drawing</a> tutorial to learn more about computer graphics
+rect(10,10,50,100);
+		</pre></code></b>
+		<img src="/programmingclub/img/helloProcessing.rectangle.png"/><p></p>
+
+		<li>The <b><a href="http://processing.org/reference/fill_.html">fill()</a></b> function changes the colour used to <b>fill</b> the next graphic that is drawn:</li>
+		<pre><code><b>
+// set the color of the next graphic
+// here it turns the rectangle red using a "red/green/blue" (RGB) color code for bright red: red=255, blue=0, green=0
+<font color="green">fill(255,0,0);</font>
+rect(10,10,50,100);
+		</pre></code></b>
+		<img src="/programmingclub/img/helloProcessing.rectangle.red.png"/><p></p>
+		
+		<li>The <b><a href="http://processing.org/reference/text_.html">text()</a></b> function draws some text:</li>
+		<pre><code><b>
+// draw text "Some Text" at (50,50)
+text("Some Text",50,50);
+		</pre></code></b>
+		<img src="/programmingclub/img/helloProcessing.text.png"/><p></p>
+
+		<li>The <b><a href="http://processing.org/reference/textSize_.html">textSize()</a></b> function changes the font size of the next text drawn:</li>
+		<pre><code><b>
+// change the font size of the next text
+// here it sets the size of "Some Text" to 48
+<font color="green">textSize(48);</font>
+text("Some Text",20,20);
+		</pre></code></b>
+		<img src="/programmingclub/img/helloProcessing.text.large.png"/><p></p>
+
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<pre><code><b>
+// make the sketch window a bit bigger, 600 wide by 400 high
+size(600, 400);
+
+// make the sketch window background black, in grayscale 0 means black
+background(0);
+
+// smooth() makes everything look a bit smoother, but take a bit longer
+smooth();
+
+// draw a red rectangle
+// fill() sets the color of the next graphic to be drawn, using an RGB code
+// rect() draws a rectangle with specified position and size
+fill(255,0,0);
+rect(50,50,500,100);
+
+// draw some text on top of the rectangle
+// textSize() sets the font size for the next text to be drawn
+// text() draws the text with the specified string and position
+textSize(48);
+text("Hello Processing!", 100, 100);
+		</pre></code></b>
+		</div>
+	</body>
+</html>

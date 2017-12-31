@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Firework</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div>
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Firework</h1>
+		<h3>Objective</h3>
+		<p><b>Use the current system time in an animation sequence</b></p>
+
+		<h3>Task</h3>
+		<p>
+		<li><b>Easy:</b> Set off a green firework</li>
+		<li><b>Medium:</b> Set off ten fireworks, one per second, each with a different color and start position</li>
+		<li><b>Hard:</b> Make the fireworks launch in an arc, instead of a straight line, to look more realistic</li>
+		<p></p>
+		</p>
+		<h3>Tools</h3>
+		<p>
+		<p>The <a href="/programmingclub/examples/fireworkStarterProgram/fireworkStarterProgram.txt">
+		starter</a> program animates a single, red firework.</p>
+		<h4>Easy Challenge hints</h4>
+		<p>Change the color of the firework, where it is declared in the setup() function:</p>
+		<pre><code><b>
+void setup()
+{
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  smooth();
+  
+  firework = new Firework(400, 1, 3, <font color="green">color(255,0,0));</font>
+}
+		</pre></code></b>
+		Remember that the color code is an RGB value where RGB means "Red Green Blue".
+		<h4>Medium Challenge hints</h4>
+		<p>Create some more fireworks in the setup function above and don't forget to draw them all in the draw() function.</p>
+		<p>The comments in the code for Firework tell you have to create one:</p>
+		<pre><code><b>
+  // Create  firework
+  // x starting position: Must be between 0 and SCREEN_WIDTH
+  // lightTime: Time in seconds at which the fuse is lit
+  // fuseTime: Time in seconds for which the fuse burns
+  // explosion: Color of the firework explosion
+  Firework(int x, int lightTime, int fuseTime, color explosionColor)
+		</pre></code></b>
+		<p>You could use random locations for the start position and color, but set either the lightTime or the fuseTime to set off one per second.</p>
+		<h4>Hard Challenge hints</h4>
+		You will need to adjust x as well as y while the firework is launching.  Perhaps you could use sin and cos functions if you know the maths...
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<li>Easy challenge <a href="/programmingclub/solutions/fireworkEasy/fireworkEasy.txt">solution</a></li>
+		<li>Medium challenge <a href="/programmingclub/solutions/fireworkMedium/fireworkMedium.txt">solution</a></li>
+		<li>Hard challenge : Let me know if you solve it.  I'll put the first solution in the gallery!</a></li>
+		</div>
+	</body>
+</html>

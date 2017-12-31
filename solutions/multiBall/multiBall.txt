@@ -1,0 +1,86 @@
+// Ball animation.  Starts at the bottom of the screen and rises to the top
+
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
+int BALL_WIDTH = 50;
+
+// Ball position.  The ball will be drawn here every time draw() is called.
+int ballX = 400;
+int ballY = SCREEN_HEIGHT - BALL_WIDTH/2;
+
+// Ball velocity.  This is used to change the position of the ball in every frame.
+int velocityY = -5; // notice that this is negative
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_HEIGHT); // set the window size - note the use of constants to make it more obvious what the numbers mean
+  smooth();
+}
+
+void draw() {
+  // make the whole background black - this will erase what was previously drawn
+  background(0);
+  
+  // setup for drawing the ball
+  fill(255,0,0); // make the ball red
+  stroke(100,0,0); // make the ball outline dark red
+  strokeWeight(2); // make the ball outline just a little thicker
+
+  drawBallGroup(1);
+  draw5BallGroup(1);
+//  drawBallGroup(.2);
+//  draw5BallGroup(.1);
+
+  // update the ball position for the next frame by adding the velocity to the position
+  // ballY += velocityY is short for ballY = ballY + velocityY
+  ballY += velocityY;
+}
+
+void drawBallGroup(float velocityScale) {
+  // draw the ball at its current position
+  // the ellipse() function is uses to draw an ellipse(x,y,width,height)
+  // a circle is a special case of an ellipse, where the width and height are the same:
+  float y = ballY * velocityScale;
+
+  ellipse(ballX-200, y, BALL_WIDTH, BALL_WIDTH);
+  ellipse(ballX, y, BALL_WIDTH, BALL_WIDTH);
+  ellipse(ballX+200, y, BALL_WIDTH, BALL_WIDTH);
+  
+  ellipse(ballX-200, SCREEN_HEIGHT - y, BALL_WIDTH, BALL_WIDTH);
+  ellipse(ballX, SCREEN_HEIGHT - y, BALL_WIDTH, BALL_WIDTH);
+  ellipse(ballX+200, SCREEN_HEIGHT - y, BALL_WIDTH, BALL_WIDTH);
+
+  ellipse(SCREEN_HEIGHT - y, ballX-200, BALL_WIDTH, BALL_WIDTH);
+  ellipse(SCREEN_HEIGHT - y, ballX, BALL_WIDTH, BALL_WIDTH);
+  ellipse(SCREEN_HEIGHT - y, ballX+200, BALL_WIDTH, BALL_WIDTH);
+
+  ellipse(y, ballX-200, BALL_WIDTH, BALL_WIDTH);
+  ellipse(y, ballX, BALL_WIDTH, BALL_WIDTH);
+  ellipse(y, ballX+200, BALL_WIDTH, BALL_WIDTH);
+}
+
+void draw5BallGroup(float velocityScale) {
+  // draw the ball at its current position
+  // the ellipse() function is uses to draw an ellipse(x,y,width,height)
+  // a circle is a special case of an ellipse, where the width and height are the same:
+  float y = ballY * velocityScale;
+
+  ellipse(ballX-300, y+200, BALL_WIDTH, BALL_WIDTH);
+  ellipse(ballX-100, y+200, BALL_WIDTH, BALL_WIDTH);
+  ellipse(ballX+100, y+200, BALL_WIDTH, BALL_WIDTH);
+  ellipse(ballX+300, y+200, BALL_WIDTH, BALL_WIDTH);
+  
+  ellipse(ballX-300, SCREEN_HEIGHT -y -200, BALL_WIDTH, BALL_WIDTH);
+  ellipse(ballX-100, SCREEN_HEIGHT -y -200, BALL_WIDTH, BALL_WIDTH);
+  ellipse(ballX+100, SCREEN_HEIGHT -y -200, BALL_WIDTH, BALL_WIDTH);
+  ellipse(ballX+300, SCREEN_HEIGHT -y -200, BALL_WIDTH, BALL_WIDTH);
+
+  ellipse(y+200, ballX-300, BALL_WIDTH, BALL_WIDTH);
+  ellipse(y+200, ballX-100, BALL_WIDTH, BALL_WIDTH);
+  ellipse(y+200, ballX+100, BALL_WIDTH, BALL_WIDTH);
+  ellipse(y+200, ballX+300, BALL_WIDTH, BALL_WIDTH);
+  
+  ellipse(SCREEN_HEIGHT -y -200, ballX-300, BALL_WIDTH, BALL_WIDTH);
+  ellipse(SCREEN_HEIGHT -y -200, ballX-100, BALL_WIDTH, BALL_WIDTH);
+  ellipse(SCREEN_HEIGHT -y -200, ballX+100, BALL_WIDTH, BALL_WIDTH);
+  ellipse(SCREEN_HEIGHT -y -200, ballX+300, BALL_WIDTH, BALL_WIDTH);
+}

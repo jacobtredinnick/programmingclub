@@ -1,0 +1,54 @@
+// Ball animation.  Starts at the top of the screen and drops off the bottom
+
+// Constants are variables that never change.  Like the radius of the ball in our animation.
+// By convention we use capitals in the variable names to show this.
+int SCREEN_WIDTH=800;
+int SCREEN_HEIGHT=800;
+
+int BALL_WIDTH = 50;
+color BALL_COLOR = color(255,0,0);
+color BALL_EDGE_COLOR = color(100,0,0);
+int BALL_EDGE_WIDTH = 2;
+color BACKGROUND_COLOR = color(0);
+
+// Ball position.  The ball will be drawn here every time draw() is called.
+float ballX = SCREEN_WIDTH/2;
+float ballY = SCREEN_HEIGHT/2;
+
+// Ball velocity.  This is used to change the position of the ball in every frame.
+float velocityX = random(-5,5);
+float velocityY = random(-5,5);
+
+// setup() is a special function in Processing
+// it is called by Processing, only once at the start of the program
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_HEIGHT); // set the window size
+  
+  // the smooth() function makes graphics draw more - well - smoothly
+  // it just takes a bit longer to draw them - but you usually won't notice
+  smooth();
+}
+
+// draw() is a special function in Processing
+// it is called by Processing, many times per second
+// every time the draw function draws, it is called a "frame"
+// use draw() to animate things in the processing window, by drawing something a little different in each frame
+void draw() {
+  // make the whole background black - this will erase what was previously drawn
+  background(BACKGROUND_COLOR);
+  
+  // setup for drawing the ball
+  fill(BALL_COLOR); // make the ball red
+  stroke(BALL_EDGE_COLOR); // make the ball outline dark red
+  strokeWeight(BALL_EDGE_WIDTH); // make the ball outline just a little thicker
+
+  // draw the ball at its current position
+  // the ellipse() function is uses to draw an ellipse(x,y,width,height)
+  // a circle is a special case of an ellipse, where the width and height are the same:
+  ellipse(ballX, ballY, BALL_WIDTH, BALL_WIDTH);
+  
+  // update the ball position for the next frame by adding the velocity to the position
+  // ballY += velocityY is short for ballY = ballY + velocityY
+  ballX += velocityX;
+  ballY += velocityY;  
+}

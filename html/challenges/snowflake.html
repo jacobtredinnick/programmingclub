@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Snowflake</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Snowflake</h1>
+		<h3>Objective</h3>
+		<p><b>Draw a snowflake using trigonometry functions</b></p>
+
+		<li><b>Easy:</b> Add small circles to the end of the long lines:</li><p></p>
+		<img src="/programmingclub/img/snowflakeEasy.png"/><p></p>
+		<li><b>Medium:</b> Add some more decoration to the long lines:</li><p></p>
+		<img src="/programmingclub/img/snowflakeMedium.png"/><p></p>
+		<li><b>Hard:</b> Customize your own snowflake(s)!</li><p></p>
+		<h3>Tools</h3>
+		<p>
+		<p>The <a href="/programmingclub/examples/snowflakeStarterProgram/snowflakeStarterProgram.txt">
+		starter</a> program has been adapted from the hard solution for the last challenge.</p>
+		<h4>Easy Challenge hints</h4>
+		Make a small change to the first loop in the Snowflake.draw function:
+		<pre><code><b>
+  void draw()
+  {
+...
+    // draw the 6 long lines & short lines
+    for (int i = 0; i < 6; ++i) {
+...      
+      // a circle on the end of each line
+      fill(flakeColor);
+      <font color="green">// ellipse( ... something ...);</font>
+    }
+		</pre></code></b>
+		<h4>Medium Challenge hints</h4>
+		Use trigonometry to find x0 and y0 somewhere along the long line.  Notice that we now have some helper functions with the trigonometry:
+		<pre><code><b>
+  void draw()
+  {
+...
+    // draw the 6 long lines
+    for (int i = 0; i < 6; ++i) {
+...
+      x0 = getFlakeCircleX(r, outerRadius * 0.4);
+      y0 = getFlakeCircleY(r, outerRadius * 0.4);
+
+		</pre></code></b>
+		Use trigonometry again to find x1 and y1 with + and - some small number of radians and a larger distanceFromCenter:
+		<pre><code><b>
+      x0 = getFlakeCircleX(r-something, someotherthing);
+      y0 = getFlakeCircleY(r-something, someotherthing);
+      line(x0,y0,x1,y1);
+
+      x0 = getFlakeCircleX(r+something, someotherthing);
+      y0 = getFlakeCircleY(r+something, someotherthing);
+      line(x0,y0,x1,y1);
+	  </pre></code></b>
+		<h4>Hard Challenge hints</h4>
+		Change some of the variables and see what happens.  Change the new Snowflake(...) in the setup().  Add multiple flakes.  Make the flakes float around.  I still want some examples for the gallery!
+		</body>
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<li>Easy challenge <a href="/programmingclub/solutions/keyboardMovementEasy/keyboardMovementEasy.txt">solution</a></li>
+		<li>Medium challenge <a href="/programmingclub/solutions/keyboardMovementMedium/keyboardMovementMedium.txt">solution</a></li>
+		<li>Hard challenge <a href="/programmingclub/solutions/keyboardMovementHard/keyboardMovementHard.txt">solution</a></li>
+		</div>
+</html>

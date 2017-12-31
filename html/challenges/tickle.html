@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Tickle</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Tickle</h1>
+		<h3>Objective</h3>
+		<p><b>Random movement based on mouse position</b></p>
+
+		<li><b>Easy:</b>Change the word "tickle" to something else</li>
+		<li><b>Medium:</b>Make sure the text never gets tickled out of the window</li>
+		<li><b>Hard:</b>Make the text jump to a random location when it hits the edge of the window</li>
+		<h3>Tools</h3>
+		<p>
+		<p>The <a href="/programmingclub/examples/tickleStarterProgram/tickleStarterProgram.txt">
+		starter</a> program is a copy one of the Processing example programs.</p>
+		<h4>Easy Challenge hints</h4>
+		Look for "tickle" and change it!
+		Well it should be that easy but you will have to spot something else...
+		<h4>Medium Challenge hints</h4>
+		Here is the code that adjusts the text position in the draw() function:
+		<pre><code><b>
+  // If the cursor is over the text, change the position
+  if (abs(mouseX - x) < hr &&
+      abs(mouseY - y) < vr) {
+    <font color="green">x += random(-5, 5);</font>
+    <font color="green">y += random(-5, 5);</font>
+  }
+		</pre></code></b>
+		You need to add a check <b>after</b> this random adjustment to see if the new x or y value will push the text out of the window and set it back to the edge if so.
+		For example this is how to stop the text going off the left edge :
+		<pre><code><b>
+    // make sure the text does not get tickled off the screen
+    if (x < hr) {
+      x = hr;
+    }
+		</pre></code></b>
+		The random movements in this example make it very hard to test your changes.
+		Consider temporarily editing the other code to make it somehow easier to test.
+		Perhaps we can change the random adjustment to make it more likely to hit the edge in normal use?
+		
+		<h4>Hard Challenge hints</h4>
+		This is not really much harder than the medium challenge.
+		Start with the medium solution (link below) and set a random x and y value when it hits the edge.
+		</body>
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<li>Easy challenge <a href="/programmingclub/solutions/tickleEasy/tickleEasy.txt">solution</a></li>
+		<li>Medium challenge <a href="/programmingclub/solutions/tickleMedium/tickleMedium.txt">solution</a></li>
+		<li>Hard challenge <a href="/programmingclub/solutions/tickleHard/tickleHard.txt">solution</a></li>
+		</div>
+</html>

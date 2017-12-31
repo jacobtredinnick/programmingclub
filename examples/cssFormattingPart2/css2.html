@@ -1,0 +1,30 @@
+        <html>
+        <head>
+        <style>
+        /* Apply styles to HTML elements by their type e.g. <P>, <h1> etc*/
+        H1 {color:orange}  
+        p {color:white;background-color:purple}
+        
+        /* Apply styles to all HTML elements with the same "class" attribute */
+        .big {font-size:36px}
+        .red {color:red; background-color:gray}
+        
+        /*- Apply styles to specific HTML elements using the "id" attribute*/
+        #intro {background-color:pink}
+        #last {font-size:12px; color:blue; border-style:solid; border-color:purple}
+        
+        </style>
+        </head>
+        <body>
+		<h1>This is a &lt;H1&gt; and so the style comes from the H1 style above</h1>
+        <p>This is a paragraph. The style comes from the "P" style above </p>
+		
+        <p class="big">I am in class "Big". Look for ".big" in the "style" secton.</p>
+        <p class="big">Same class, same style!</p>
+
+        <p id="intro" >My ID is "Intro". Look for the style "#intro" style set my background colour but where did the font colour come from?</p>
+		<p id="last" class="red">This is a paragraph with class "red" and id="last", where did my styles come from?</p>
+
+		<p style="color:black; background-color:white">See what happens when we add a "style" tag</p>
+        </body>
+        </html>

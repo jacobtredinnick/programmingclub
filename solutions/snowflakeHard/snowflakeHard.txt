@@ -1,0 +1,4 @@
+// start with the medium example and change it around
+// add some more / different decorations
+// perhaps make it float around or grow?
+// perhaps add lots of random sized, moving flakes?

@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Noughts And Crosses - Hallowe'en Game</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Noughts And Crosses - Hallowe'en Game</h1>
+
+		<h3>Task</h3>
+		<p><b>Use some spooky images instead of boring noughts and crosses</b><p></p>
+		<img src="/programmingclub/img/noughtsAndCrossesRandomHalloweenGame.png"/>
+
+		<h3>Objective</h3>
+		<p><b>Use images in the game</b></p>
+
+		<h3>Tools</h3>
+		<li><b>IMPORTANT:</b> The images must be in the folder containing your program.  I will show you how to use the browser to save the images:</li><p></p>
+		noughtImage.jpg:<br><img src="/programmingclub/examples/noughtsAndCrossesRandomHalloweenGameStarterProgram/noughtImage.jpg"/><br>
+		crossImage.jpg:<br><img src="/programmingclub/examples/noughtsAndCrossesRandomHalloweenGameStarterProgram/crossImage.jpg"/>
+		<li>The <b><a href="http://processing.org/reference/PImage.html">PImage</a></b> type is used for handling images in Processing</li><p></p>
+		<li>The <b><a href="http://processing.org/reference/loadImage_.html">loadImage()</a></b> function loads an image from disk</li><p></p>
+		<li>The <b><a href="http://processing.org/reference/loadImage_.html">image()</a></b> function draws a PImage that already been loaded</li><p></p>
+		<li>The <b><a href="http://processing.org/learning/pixels/">images and pixels tutorial</a></b> explains a bit more</li><p></p>
+		<p>The <a href="/programmingclub/examples/noughtsAndCrossesRandomHalloweenGameStarterProgram/noughtsAndCrossesRandomHalloweenGameStarterProgram.txt">
+		starter</a> program contains guess what?  Our noughts and crosses game once again, but with the drawing of noughts and crosses removed.</p>
+		<p>The program already loads the images NOUGHT_IMAGE and CROSS_IMAGE.  The drawNought() and drawCross() functions are already called by the program.
+		Use the image() function to draw the images in the squares:
+		<pre><code><b>
+  // draw a nought in the square for the specified index
+  void drawNought(int squareX, int squareY) {
+    int x = convertIndexToPoint(squareX);
+    int y = convertIndexToPoint(squareY);
+    
+    // use the image() function to show the spooky nought image
+  }
+
+  // draw a cross in the square for the specified index
+  void drawCross(int squareX, int squareY) {
+    int x = convertIndexToPoint(squareX);
+    int y = convertIndexToPoint(squareY);
+
+    // use the image() function to show the spooky cross image
+  }
+		</pre></code></b>
+
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<p>The <a href="/programmingclub/solutions/noughtsAndCrossesRandomHalloweenGame/noughtsAndCrossesRandomHalloweenGame.txt">solution</a>
+		program implements the drawNought() and drawCross() methods as follows.  You will also need to copy the images to your project to get this to work, or use your own images (they have to be the right size!):
+		<pre><code><b>
+  // draw a nought in the square for the specified index
+  void drawNought(int squareX, int squareY) {
+    int x = convertIndexToPoint(squareX);
+    int y = convertIndexToPoint(squareY);
+    
+    // show the pumpkin image
+    <font color="green">image(NOUGHT_IMAGE, x+5, y+5);</font>
+  }
+
+  // draw a cross in the square for the specified index
+  void drawCross(int squareX, int squareY) {
+    int x = convertIndexToPoint(squareX);
+    int y = convertIndexToPoint(squareY);
+
+    // show the ghost image
+    <font color="green">image(CROSS_IMAGE, x+5, y+5);</font>
+  }
+		</pre></code></b>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,141 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Connect Four Human Player</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Connect Four Human Player</h1>
+		<h3>Task</h3>
+		<p>
+		<b>Place the pieces into the grid using the mouse.</b><br>
+		In this challenge we will allow a human player to place the pieces into the game grid.  This will be a lot easier than making the computer play!<br>
+		Here are the requirements:<br>
+		<li>The yellow and red players take turns.  Yellow starts.</li>
+		<li>When the <b>mouse</b> is <b>moved</b> near the first empty slot in a column, that slot will be highlighted with a lighter version of the player's colour.</li>
+		<li>When the <b>mouse</b> is <b>clicked</b>, that player's colour will be placed in the first empty slot in that column.</li>
+		<li>Clicks in a full column will be ignored.</li>
+		</p>
+		<h3>Tools</h3>
+		<p>The <a href="/programmingclub/examples/connectFourHumanPlayerStarterProgram/connectFourHumanPlayerStarterProgram.txt">
+		starter</a> program has the grid from the last challenge, but it has been reworked to use some helper code and leaves a few hints...</p>
+		</p>
+		<pre><code><b>
+void draw() {
+  // draw the current state of the grid, based on the model
+  drawGrid();
+  
+  // draw a preview in a colour based on the current player
+  // HINT: Use the Connect Four model (grid object) and drawing helper code to find the cell at the current mouse position and draw a preview
+}
+
+void mouseClicked() {
+  // HINT: Use the Connect Four model (grid object) to set the piece in the slot clicked and then change the player
+}
+
+// YOU SHOULD NOT HAVE TO MODIFY ANY CODE BELOW THIS LINE - JUST USE IT
+		</pre></code></b>
+		<p>For a program like this, it is common to split up some of the code into a "model".
+		The model is a representation of the state of the game at any time which can be modified, but does not know about any moving of the mouse or drawing of the grid.
+		In this way, a complicated program can be split up into easier to understand pieces.
+		</p>
+		<p>The most basic thing to model is the content of any of the slots.  Don't worry if you don't recognize some of the keywords below:
+		</p>
+		<pre><code><b>
+// Let's call the circular gaps in the Connect Four grid "slots"
+// Each slot can either be empty, yellow or red.
+// (this would normally be an "enumerated type" but processing seems not to support these yet)
+class SlotType {
+  public static final int EMPTY = 0;
+  public static final int YELLOW = 1;
+  public static final int RED = 2;
+}
+		</pre></code></b>
+		<p>
+		There are many ways in which we could model the game.
+		Our drawing code should only deal with the Grid type, which currently has enough functions on it to allow us to draw an empty one.
+		To understand how it works, read the comments above each function.  You can see these functions being called in the drawing code.
+		</p>
+		<pre><code><b>
+class Grid {
+  ...
+  
+  // create a grid with all slots empty
+  Grid(int rows, int columns) {
+  ...
+  
+  // get the number of rows in this grid
+  int getNumRows() {
+  ...
+  
+  // get the number of columns in this grid
+  int getNumCols() {
+  ...
+ 
+  // get the content of a specified slot as an integer code that should match one of the SlotType values
+  // rows & columns are "indexed" starting at 0
+  // the leftmost column is column 0 and the bottom row is row 0 
+  int getSlot(int row, int col) {
+  ...
+  
+  // gets the index of the first empty slot in a specified column
+  // returns -1 if the column has no empty slots
+  int getFirstEmptySlot(int col) {
+  ...
+  
+  // set a (yellow or red) piece into the specified slot
+  // ignoring gravity for now - this is currently handled by the client calling getFirstEmptySlot
+  void set(int row, int col, int type) {
+  ...
+		</pre></code></b>
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<p>Here is some code that will draw the preview and place the pieces using the existing helper code:</p>
+		<pre><code><b>
+void draw() {
+  // first draw the current state of the grid, based on the model
+  drawGrid();
+  
+  // draw a preview in a colour based on the current player
+  int col = getActiveColumn(mouseX, grid.getNumCols());
+  int row = grid.getFirstEmptySlot(col);	
+    if (row != -1) {
+    drawCellPreview(row, col);
+  }
+}
+
+void mouseClicked() {
+  // place a piece if the column was valid and change player
+  int col = getActiveColumn(mouseX, grid.getNumCols());
+  int row = grid.getFirstEmptySlot(col);
+  if (row != -1) { // check column is not full
+    grid.set(row, col, player);
+    if (player == SlotType.YELLOW) {
+      player = SlotType.RED;
+    }
+    else {
+      player = SlotType.YELLOW;
+    }
+  }
+}
+
+		</pre></code></b>
+		
+		<p>A complete solution can be found <a href="/programmingclub/examples/connectFourHumanPlayerStarterProgram/connectFourHumanPlayerStarterProgram.txt">
+		here</a>.</p>
+		</div>
+	</body>
+</html>

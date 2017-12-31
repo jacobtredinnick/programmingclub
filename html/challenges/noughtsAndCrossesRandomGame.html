@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Noughts And Crosses - Random Game</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Noughts And Crosses - Random Game</h1>
+
+		<h3>Task</h3>
+		<p><b>Draw a line through the winning move</b><p></p>
+		<img src="/programmingclub/img/noughtsAndCrossesRandomGame.png"/>
+
+		<h3>Objective</h3>
+		<p><b>Make the gameplay work according to the rules, with random computer moves</b></p>
+
+		<h3>Tools</h3>
+		<p>The <a href="/programmingclub/examples/noughtsAndCrossesRandomGameStarterProgram/noughtsAndCrossesRandomGameStarterProgram.txt">
+		starter program</a>	contains a working noughts and crosses game.  Copy this to a new program and run it to see.</p>
+		<p>The program already calls the drawWin() method below when it detects a win.
+		You have to "implement" this method to draw something that indicates a win - like a line.
+		Read the comments in the code for more clues.</p>
+		<p>To test it, you just have to beat the computer but don't worry - the computer is currently a rubbish player!
+		(but we will work on that another time...)</p>
+		<pre><code><b>
+  // draw a line through the winning 3 squares: (x0,y0) --> (x1,y1)
+  void drawWin(GameWin win) {
+    // win.player is NOUGHT or CROSS - use this to decide what to draw
+    // (win.x0, win.y0) is the (x,y) index of the first square of the 3
+    // (win.x1, win.y1) is the (x,y) index of the last square of the 3
+    // use convertIndexToPoint to convert an index to an on-screen point to draw
+    // HINT: it will be easier to draw a line based on the centres of the winning squares (use squareWidth to find the centre)
+  }
+		</pre></code></b>
+
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<p>The <a href="/programmingclub/solutions/noughtsAndCrossesRandomGame/noughtsAndCrossesRandomGame.txt">solution</a>
+		program implements the drawWin() method as follows.  First set the stroke and strokeWeight depending on the player, then draw a line between the centres of the winning squares:
+		<pre><code><b>
+  // draw a line through the winning 3 squares: (x0,y0) --> (x1,y1)
+  void drawWin(GameWin win) {
+    // win.player is NOUGHT or CROSS - use this to decide what to draw
+    // (win.x0, win.y0) is the (x,y) index of the first square of the 3
+    // (win.x1, win.y1) is the (x,y) index of the last square of the 3
+    // use convertIndexToPoint to conver an index to an on-screen point to draw
+    // HINT: it will be easier to draw a line based on the centres of the winning squares (use squareWidth to find the centre)
+
+    strokeWeight(STROKE_WEIGHT);
+    if (win.player == NOUGHT) {
+      stroke(NOUGHT_COLOR);
+    }
+    else {
+      stroke(CROSS_COLOR);
+    }
+
+    int x0 = convertIndexToPoint(win.x0) + squareWidth/2;
+    int y0 = convertIndexToPoint(win.y0) + squareWidth/2;
+    int x1 = convertIndexToPoint(win.x1) + squareWidth/2;
+    int y1 = convertIndexToPoint(win.y1) + squareWidth/2;
+    line(x0,y0,x1,y1);
+  }		</pre></code></b>
+		</div>
+	</body>
+</html>

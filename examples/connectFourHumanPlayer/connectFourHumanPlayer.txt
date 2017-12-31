@@ -1,0 +1,222 @@
+int SLOT_DIAMETER=80;
+int SLOT_SPACING=100;
+int GRID_WIDTH=700;
+int GRID_HEIGHT=600;
+
+// these came from Tools > Color Selector
+int BLUE_COLOR = #0B0EB2;
+int YELLOW_COLOR = #EEFF0D;
+int RED_COLOR = #FF150D;
+int EMPTY_COLOR = #FFFFFF;
+
+int player = SlotType.YELLOW; // yellow starts
+Grid grid = new Grid(6, 7); // the standard Connect Four grid
+
+void setup() {
+  size(GRID_WIDTH, GRID_HEIGHT);
+  smooth();
+}
+
+void draw() {
+  // first draw the current state of the grid, based on the model
+  drawGrid();
+  
+  // draw a preview in a colour based on the current player
+  int col = getActiveColumn(mouseX, grid.getNumCols());
+  int row = grid.getFirstEmptySlot(col);
+    if (row != -1) {
+    drawCellPreview(row, col);
+  }
+}
+
+void mouseClicked() {
+  // place a piece if the column was valid and change player
+  int col = getActiveColumn(mouseX, grid.getNumCols());
+  int row = grid.getFirstEmptySlot(col);
+  if (row != -1) { // check column is not full
+    grid.set(row, col, player);
+    if (player == SlotType.YELLOW) {
+      player = SlotType.RED;
+    }
+    else {
+      player = SlotType.YELLOW;
+    }
+  }
+}
+
+// YOU SHOULD NOT HAVE TO MODIFY ANY CODE BELOW THIS LINE - JUST USE IT
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Drawing helper code
+//
+// This code uses the Connect Four game model to help draw the current state of the game
+// The code needs to use the model as well as various "drawing" info such as colors and grid sizes
+// But the model should not depend on any of this stuff 
+
+void drawGrid() {
+  background(BLUE_COLOR); // a blue picked from Tools > Color Selector
+  
+  // draw the current state of the grid
+  int firstPos = SLOT_SPACING / 2;
+  for (int i = 0; i < grid.getNumRows(); i++) { // for each row
+    for (int j = 0; j < grid.getNumCols(); j++) { // for each column
+      drawCell(i, j);
+    }
+  }
+}
+
+void drawCell(int row, int col) {
+  // get the pixel coordinates for the centre of the slot
+  int x = getSlotX(col);
+  int y = getSlotY(row);
+
+  // for the highlight, we're just going to surround the cell with the color for this slotType
+  int slotColor = getSlotPreviewColor(grid.getSlot(row, col));
+  stroke(slotColor);     
+  fill(slotColor);     
+  ellipse(x, y, SLOT_DIAMETER, SLOT_DIAMETER);
+}
+
+void drawCellPreview(int row, int col) {
+  // get the pixel coordinates for the centre of the slot
+  int x = SLOT_SPACING/2 + col*SLOT_SPACING;
+  int y = GRID_HEIGHT - (SLOT_SPACING/2 + row*SLOT_SPACING);
+
+  // for the highlight, we're just going to surround the cell with the color for this slotType
+  int slotColor = getSlotPreviewColor(player);
+  stroke(slotColor);     
+  fill(EMPTY_COLOR);     
+  strokeWeight(5);
+  ellipse(x, y, SLOT_DIAMETER, SLOT_DIAMETER);
+}
+
+// get the index of the column at the specified position
+// note that this function is not part of the model, because the model should know about how big the window is
+// if you put too much code in one place it can quickly become very hard to deal with...
+int getActiveColumn(int x, int numCols) {
+ // I forgot to tell you about "integer truncation" - when you divide one integer (whole number) by another the result is another integer and the value is "truncated" down
+ // So for example 9/10 is 0.  Remember, the result also is an integer here so we can't have 0.9 and we don't round up either
+ int activeCol = (x * numCols) / GRID_WIDTH;
+ return activeCol;
+}
+
+int getSlotPreviewColor(int slotType) {
+  if (slotType == SlotType.YELLOW) {
+    return YELLOW_COLOR;
+  }
+  if (slotType == SlotType.RED) {
+    return RED_COLOR;
+  }
+  // else assume empty for now
+  return EMPTY_COLOR;
+}
+
+// get the x coordinate of the pixel at the centre of the slot in the specified column
+int getSlotX(int col) {
+    return SLOT_SPACING/2 + col*SLOT_SPACING; 
+}
+
+// get the x coordinate of the pixel at the centre of the slot in the specified row
+int getSlotY(int row) {
+  // the row at index 0 in the model is the one at the bottom of the column, but the pixels start at 0 in the topleft
+  return GRID_HEIGHT - (SLOT_SPACING/2 + row*SLOT_SPACING);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Connect Four game model
+//
+// The following code models the Connect Four grid.
+// The Model holds the data for the game and provides functions to query or change it.
+// We could write this code in many different ways.  Each way of doing this "models" the real world state of the counters in the grid, the current player, etc.
+
+import java.util.List;
+
+// Let's call the circular gaps in the Connect Four grid "slots"
+// Each slot can either be empty, yellow or red.
+// (this would normally be an "enumerated type" but processing seems not to support these yet)
+class SlotType {
+  public static final int EMPTY = 0;
+  public static final int YELLOW = 1;
+  public static final int RED = 2;
+}
+
+// each column in the grid has a number of slots
+// for now we represent each slot as an integer which should be one of the SlotType values above
+class Column {
+  private List<Integer> slots;
+
+  // create an empty column of n slots, each is represented by an integer code
+  Column(int n) {
+    slots = new ArrayList<Integer>(n);
+    for (int i=0; i < n; i++) {
+      slots.add(SlotType.EMPTY);
+    }
+  }
+  
+  // get the number of slots in the colum
+  int size() {
+    return slots.size();
+  }
+  
+  // get the type of slot at the specified index
+  // the bottom slot of the column is at index 0 
+  int get(int i) {
+      return slots.get(i);
+  }
+
+  // get the index of the first empty slot in this column
+  int getFirstEmptySlot() {
+      for (int i = 0; i < slots.size(); ++i) {
+         if (get(i) == SlotType.EMPTY) {
+           return i;
+         }
+      }
+      return -1;
+  }
+  
+  // add a (red or yellow) piece to this column
+  void set(int row, int type) {
+    slots.set(row, type);
+  }
+}
+
+class Grid {
+  private List<Column> grid;
+  
+  // create a grid with all slots empty
+  Grid(int rows, int columns) {
+    grid = new ArrayList<Column>();
+    for (int i=0; i < columns; i++) {
+      grid.add(new Column(rows));
+    }
+  }
+  
+  // get the number of rows in this grid
+  int getNumRows() {
+    return grid.get(0).size(); // ASSUME: there will be at least on column - otherwise it'll be a rubbish game!
+  }
+  
+  // get the number of columns in this grid
+  int getNumCols() {
+    return grid.size();
+  }
+ 
+  // get the content of a specified slot as an integer code that should match one of the SlotType values
+  // rows & columns are "indexed" starting at 0
+  // the leftmost column is column 0 and the bottom row is row 0 
+  int getSlot(int row, int col) {
+    return grid.get(col).get(row);
+  }
+ 
+  // gets the index of the first empty slot in a specified column
+  // returns -1 if the column has no empty slots
+  int getFirstEmptySlot(int col) {
+      return grid.get(col).getFirstEmptySlot();
+  }
+  
+  // set a (yellow or red) piece into the specified slot
+  // ignoring gravity for now - this is currently handled by the client calling getFirstEmptySlot
+  void set(int row, int col, int type) {
+    grid.get(col).set(row, type);
+  }
+}

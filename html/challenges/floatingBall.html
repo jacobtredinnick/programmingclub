@@ -1,0 +1,113 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Floating Ball</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Floating Ball</h1>
+		<h3>Task</h3>
+		<p>
+		<b>Make an animation of a ball that starts at the bottom of the screen and floats upwards.</b><p></p>
+		We will be using the setup() and draw() functions that are used in most Processing programs.<p></p>
+		<img src="/programmingclub/img/floatingBall.png"/>
+		</p>
+		<h3>Tools</h3>
+		<p>
+		<li>The program below shows a ball starting at the top and falling to the bottom.  This is explained in the comments.</li><p></p>
+		<li><b>Hint:</b> Change 2 lines of the program.  1 line to make it start at the bottom of the window, another to make it float up instead of fall down</li><p></p>
+		<pre><code><b>
+// Ball animation.  Starts at the top of the screen and drops off the bottom
+
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
+int BALL_WIDTH = 50;
+
+// Ball position.  The ball will be drawn here every time draw() is called.
+int ballX = 400;
+int ballY = BALL_WIDTH/2;
+
+// Ball velocity.  This is used to change the position of the ball in every frame.
+int velocityY = 5;
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  smooth();
+}
+
+void draw() {
+  // make the whole background black - this will erase what was previously drawn
+  background(0);
+  
+  // setup for drawing the ball
+  fill(255,0,0); // make the ball red
+  stroke(100,0,0); // make the ball outline dark red
+  strokeWeight(2); // make the ball outline just a little thicker
+
+  // draw the ball at its current position
+  // the ellipse() function is uses to draw an ellipse(x,y,width,height)
+  // a circle is a special case of an ellipse, where the width and height are the same:
+  ellipse(ballX, ballY, BALL_WIDTH, BALL_WIDTH);
+  
+  // update the ball position for the next frame by adding the velocity to the position
+  // ballY += velocityY is short for ballY = ballY + velocityY
+  ballY += velocityY;
+}
+		</pre></code></b>
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<pre><code><b>
+// Ball animation.  Starts at the bottom of the screen and rises to the top
+
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
+int BALL_WIDTH = 50;
+
+// Ball position.  The ball will be drawn here every time draw() is called.
+int ballX = 400;
+
+int ballY = <font color="green">SCREEN_HEIGHT - BALL_WIDTH/2;</font>
+
+// Ball velocity.  This is used to change the position of the ball in every frame.
+int velocityY = <font color="green">-5; // notice that this is negative</font>
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_HEIGHT); // set the window size - note the use of constants to make it more obvious what the numbers mean
+  smooth();
+}
+
+void draw() {
+  // make the whole background black - this will erase what was previously drawn
+  background(0);
+  
+  // setup for drawing the ball
+  fill(255,0,0); // make the ball red
+  stroke(100,0,0); // make the ball outline dark red
+  strokeWeight(2); // make the ball outline just a little thicker
+
+  // draw the ball at its current position
+  // the ellipse() function is uses to draw an ellipse(x,y,width,height)
+  // a circle is a special case of an ellipse, where the width and height are the same:
+  ellipse(ballX, ballY, BALL_WIDTH, BALL_WIDTH);
+  
+  // update the ball position for the next frame by adding the velocity to the position
+  // ballY += velocityY is short for ballY = ballY + velocityY
+  ballY += velocityY;
+}
+		</pre></code></b>
+		</div>
+	</body>
+</html>

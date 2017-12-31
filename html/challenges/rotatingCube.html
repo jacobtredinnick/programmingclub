@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Rotating Cube</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div>
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Rotating Cube</h1>
+
+		<h3>Objective</h3>
+		<p><b>Draw some 3D graphics</b></p>
+
+		<h3>Task</h3>
+		<li><b>Easy:</b> Adjust the starter animation to make the cube rotate in a different direction</li>
+		<li><b>Medium:</b> Make the cube rotate in two directions and vary the speed of the rotation</li>
+		<li><b>Hard:</b> Make the cube both rotate and move</li>
+
+		<h3>Tools</h3>
+		<p>
+		<p>The <a href="/programmingclub/examples/rotatingCubeStarterProgram/rotatingCubeStarterProgram.txt">
+		starter</a> program has a 3D  animation where the cube rotates about the X axis.  In 3D graphics there is an X and a Y axis
+		(which we have used before) and there is also a Z axis (for the 3rd dimension).  We don't have to use the Z axis in this challenge but you can if you want.
+		</p>
+		<h4>Easy Challenge hints</h4>
+		<p>The  rotation of the cube in the starter program is done in the draw() function:<p>
+		<pre><code><b>
+		  rotateX(rotation); // makes the box draw with a specific rotation
+		</pre></code></b>
+		<p>How would you expect to change the function to rotate about the Y or Z axis?</p>
+		<h4>Medium Challenge hints</h4>
+		<p>You can call multiple rotate... functions to get a 3D rotation</p>
+		<pre><code><b>
+		  rotateX(...
+		  rotateY(...
+		  rotateZ(...
+		</pre></code></b>
+  		<p>The speed of the rotation is currently constant:</p>
+		<pre><code><b>
+		  final float ROTATION_PER_FRAME = .01; // change in rotation in each frame
+		</pre></code></b>
+  		<p>Try turning this into a variable that uses, say, <b>mouseX</b></p>
+		<h4>Hard Challenge hints</h4>
+        <p>The position of the cube is set by the <b>translate</b> function:</p>
+		<pre><code><b>
+          translate(400,400); // makes the box draw with centre here
+		</pre></code></b>
+        <p>You will have to introduce a variable that is set every frame, like in previous challenges...</p>
+        <p>For collision detection (bouncing off the screen edge) you can do something like we did in the "bouncing ball" challenges, but it will be a bit harder to get the collision exactly right in 3D...</p>
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<li>Easy challenge <a href="/programmingclub/solutions/rotatingCubeEasy/rotatingCubeEasy.txt">solution</a></li>
+		<li>Medium challenge <a href="/programmingclub/solutions/rotatingCubeMedium/rotatingCubeMedium.txt">solution</a></li>
+		<li>Hard challenge <a href="/programmingclub/solutions/rotatingCubeHard/rotatingCubeHard.txt">solution</a></li>
+		</div>
+	</body>
+</html>

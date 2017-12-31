@@ -1,0 +1,48 @@
+final int SCREEN_WIDTH = 800;
+final int SCREEN_HEIGHT = 800;
+final int CUBE_SIDE = 250;
+
+// rotations are all done in "radians"
+// if you've not done these yet in maths - don't worry but PI radians is 180 degrees!
+// if you don't know what PI is (it's roughly 3.14) then just give it a try anyway ;)
+final float ROTATION_PER_FRAME = .01; // change in rotation in each frame
+float rotation = 0; // current rotation value
+
+// current cube position
+int x = 400;
+int y = 400;
+
+int xVelocity = 1;
+int yVelocity = 1;
+
+void setup(){
+  size(SCREEN_WIDTH, SCREEN_HEIGHT, P3D);
+  noStroke();
+}
+
+void draw(){
+  background(0); // makes the background black
+  lights(); // turns on some fancy 3d effects
+  
+  translate(x,y); // makes the box draw with centre here
+  rotateX(rotation); // makes the box draw with a specific rotation in the X axis
+  rotateY(rotation); // makes the box draw with a specific rotation in the Y axis
+  box(CUBE_SIDE); // draws a 3D box - 1 parameter makes it a cube
+  
+  rotation += ROTATION_PER_FRAME; // increases the rotation with which to draw the cube
+
+  // check (roughly) for collision with screen edge and adjust position of cube
+  // bonus points if you can make the collision detection work better
+  if ((xVelocity < 0 && x < CUBE_SIDE) || (xVelocity > 0 && x > SCREEN_WIDTH - CUBE_SIDE)) {
+    xVelocity = -xVelocity;
+  }
+  if ((yVelocity < 0 && y < CUBE_SIDE) || (yVelocity > 0 && y > SCREEN_HEIGHT - CUBE_SIDE)) {
+    yVelocity = -yVelocity;
+  }
+
+  // bonus points if you can make the cube rotation look more natural
+  
+  x += xVelocity;
+  y += yVelocity;
+}
+

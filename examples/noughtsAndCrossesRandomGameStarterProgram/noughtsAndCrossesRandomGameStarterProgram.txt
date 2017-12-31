@@ -1,0 +1,352 @@
+// noughtsAndCrossesRandonGame -  noughts and crosses game in which the computer plays randomly!
+int SCREEN_WIDTH = 600; // this game assumes a square screen!
+
+// constants to mark the types that can be held in the game
+final int EMPTY = -1;
+final int NOUGHT = 0; // it would be rude not to
+final int CROSS = 1;
+
+GameState state = new GameState();
+GameEngine engine = new GameEngine();
+GameGrid grid = new GameGrid(SCREEN_WIDTH);
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_WIDTH);
+  smooth();
+}
+
+void draw() {
+  // draw the current state
+  grid.draw(state);
+  
+  // additional drawing and nothing more to do if there is a win
+  GameWin win = engine.findWin();
+  if (win != null) {
+    grid.drawWin(win);
+    return; // nothing more to do
+  }
+
+  if (state.isNoughtToMove()) {
+    // if the human is moving, highlight the square currently containing the mouse
+    // mouseClicked handles the actual move and the next draw() will update the result
+    grid.drawPreviewFromMousePosition(state, mouseX, mouseY);
+  }
+  else {
+    // otherwise the computer is moving delegate this to the engine and the next draw() will update the result
+    engine.handleComputerMove(state);
+  }
+}
+
+// called by Processing when the mouse is clicked
+void mouseClicked() {
+  if (state.isNoughtToMove()) {
+    // set the nought variables to the topleft corner of the square containing the mouse
+    int noughtX = grid.convertPointToIndex(mouseX);
+    int noughtY = grid.convertPointToIndex(mouseY);
+    if (state.isEmpty(noughtX, noughtY)) {
+      state.addNought(noughtX, noughtY);
+    }
+    
+    // wait for the computer to move...
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// GameWin holds information about a win
+class GameWin {
+  final int player; // GameState.NOUGHT or GameState.CROSS
+  final int x0;
+  final int y0;
+  final int x1;
+  final int y1;
+  
+  GameWin(int player, int x0, int y0, int x1, int y1) {
+    this.player = player;
+    this.x0 = x0;
+    this.y0 = y0;
+    this.x1 = x1;
+    this.y1 = y1;
+  }
+}
+    
+
+////////////////////////////////////////////////////////////////////////////////
+// GameEngine holds gameplay knowledge including the computer's next move, deciding legal moves and winning moves
+// does not hold any state
+class GameEngine {
+  void handleComputerMove(GameState state) {
+    // random strategy - pick a square at random until we have a valid move - not very bright!
+    int n = 0;
+    while (true) {
+      int crossX = randomInteger(0,2);
+      int crossY = randomInteger(0,2);
+      if (state.isEmpty(crossX, crossY)) {
+        state.addCross(crossX, crossY);
+        break;
+      }
+      n++;
+    }
+  }
+
+  // return a winning row of 3 if one exists, null otherwise
+  GameWin findWin() {
+    GameWin win = findWin(NOUGHT);
+    if (win == null) {
+      win = findWin(CROSS);
+    }
+    return win; // could still be null if no-one has won
+  }
+
+  // return a winning row of 3 if one exists for the specfied player (noughts or crosses), null otherwise
+  GameWin findWin(int player) {
+    // brute force check of all possible rows and columns - may be a better algorithm but this is quite quick
+    for (int i = 0; i < 2; i++) {
+      if (state.lookup(i,0) == player && state.lookup(i,1) == player && state.lookup(i,2) == player) {
+        // winning column
+        return new GameWin(player,i,0,i,2);
+      }
+      if (state.lookup(0,i) == player && state.lookup(1,i) == player && state.lookup(2,i) == player) {
+        // winning row
+        return new GameWin(player,0,i,2,i);
+      }
+    }
+    if (state.lookup(0,0) == player && state.lookup(1,1) == player && state.lookup(2,2) == player) {
+      // winning diagonal
+      return new GameWin(player,0,0,2,2);
+    }
+    if (state.lookup(0,2) == player && state.lookup(1,1) == player && state.lookup(2,0) == player) {
+      // winning other diagonal
+      return new GameWin(player,0,2,2,0);
+    }
+    
+    return null;
+  }
+  
+  // pick a random integer between from and to
+  // based on the built in random function that picks a random float within a range
+  int randomInteger(int from, int to)
+  {
+    // pick a random float in the range from --> (to + 1)
+    float r = random(from, to+1);
+
+    // pick the corresponding integer
+    // we could use a "cast" or "round()" here but this needs some care
+    for (int i = from; i < to+1; i++) {
+      if (r >= i && r <= i+1) { // good enough here
+        return i;
+      }
+    }
+  
+    return from;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Holds the current state of the game but no logic about the play
+class GameState {
+  // in this game either the human or the computer must move
+  boolean humanMove = true; // human always moves first for now
+
+  // model the game state as "2D array" of 9 squares that can each be either empty, nought or cross
+  // unfortunately we have to introduce you to "array" syntax here - sorry!
+  // (I won't try to explain it here - just go with it!)
+  // take a look at the tutorial if you have a chance: http://processing.org/learning/2darray/
+  int[][] squares = {{EMPTY, EMPTY, EMPTY},
+                     {EMPTY, EMPTY, EMPTY},
+                     {EMPTY, EMPTY, EMPTY}};
+
+  // true if it is the nought player's turn to move, false otherwise
+  boolean isNoughtToMove() {
+    // this is based on how many moves there have been
+    // even number - nought to move
+    // odd number - cross to move
+    return countMoves()%2 == 0; // n % 2 is 0 if n is even, 1 otherwise
+  }
+  
+  // the number of moves is the number of non-empty squares
+  int countMoves() {
+    int n = 0;
+    for (int i = 0; i < 3; i++) {
+       for (int j = 0; j < 3; j++) {
+         if (!isEmpty(i,j)) {
+           n++;
+         }
+       }
+    }
+    return n;
+  }
+
+  // is the square of index x,y empty?
+  // return true if yes, false if no
+  boolean isEmpty(int x, int y) {
+    return is(x, y, EMPTY);
+  }
+
+  // is the square of index x,y a nought?
+  // return true if yes, false if no
+  boolean isNought(int x, int y) {
+    return is(x, y, NOUGHT);
+  }
+
+  // is the square of index x,y a cross?
+  // return true if yes, false if no
+  boolean isCross(int x, int y) {
+    return is(x, y, CROSS);
+  }
+  
+  // is the square of index x,y of the specified type?
+  // return true if yes, false if no
+  boolean is(int x, int y, int type) {
+    return squares[x][y] == type;
+  }
+
+  // lookup the content of square index x,y
+  int lookup(int x, int y) {
+    return squares[x][y];
+  }
+  
+  // set the square at the specified index to be a nought
+  // throws an error if the indeces are not valid or if the square is already occupied
+  void addNought(int x, int y) {
+    assert isEmpty(x,y) : "Square " + x + " " + y + " must be empty";
+    squares[x][y] = NOUGHT;
+  }
+
+  // set the square at the specified index to be a nought
+  // throws an error if the indeces are not valid or if the square is already occupied
+  void addCross(int x, int y) {
+    assert isEmpty(x,y) : "Square " + x + " " + y + " must be empty";
+    squares[x][y] = CROSS;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// GameGrid is a "type" defined by us
+// Responsible for drawing the current state of the grid and for converting between screen positions and game engine "indeces"
+class GameGrid {
+  // constants
+  final color BACKGROUND_COLOR = color(170,200,200);
+  final color BACKGROUND_HIGHLIGHT_COLOR = color(190,220,220);  // just a little lighter than the background
+  final color GRID_COLOR = color(0); // black
+  final color NOUGHT_COLOR = color(0,150,0); // green
+  final color CROSS_COLOR = color(150,0,0); // red
+  final int STROKE_WEIGHT=10; // everything is drawn with a thick line for now
+
+  // variables (can't be changed because final, but can be controlled by caller)
+  final int gridWidth;
+  final int squareWidth;
+  final int noughtWidth; // also use for cross width
+  
+  // constructor allows non-constants to be set
+  GameGrid(int width)
+  {
+    gridWidth = width;
+    squareWidth = gridWidth/3;
+    noughtWidth = 7*squareWidth/8;
+  }
+
+  // draw the game grid
+  void draw(GameState state) {
+    // clear everything
+    background(BACKGROUND_COLOR);
+
+    // draw the grid
+    drawGrid();
+  
+    // draw any noughts and crosses
+    drawContents(state);
+  }
+
+  // draw a line through the winning 3 squares: (x0,y0) --> (x1,y1)
+  void drawWin(GameWin win) {
+    // win.player is NOUGHT or CROSS - use this to decide what to draw
+    // (win.x0, win.y0) is the (x,y) index of the first square of the 3
+    // (win.x1, win.y1) is the (x,y) index of the last square of the 3
+    // use convertIndexToPoint to convert an index to an on-screen point to draw
+    // HINT: it will be easier to draw a line based on the centres of the winning squares (use squareWidth to find the centre)
+  }
+
+  void drawContents(GameState state) {
+    // look at all the squares and draw a nought if there is one there
+    for (int x = 0; x < 3; x++) {
+      for (int y = 0; y < 3; y++) {
+        if (state.isNought(x,y)) {
+          drawNought(x,y);
+        }
+        else if (state.isCross(x,y)) {
+          drawCross(x,y);
+        }
+      }
+    }
+  }
+
+  // draw a nought in the square for the specified index
+  void drawNought(int squareX, int squareY) {
+    int x = convertIndexToPoint(squareX);
+    int y = convertIndexToPoint(squareY);
+    stroke(NOUGHT_COLOR);
+    strokeWeight(STROKE_WEIGHT);
+    ellipse(x + squareWidth/2, y + squareWidth/2, noughtWidth, noughtWidth); // centre of grid square
+  }
+
+  // draw a cross in the square for the specified index
+  void drawCross(int squareX, int squareY) {
+    int x = convertIndexToPoint(squareX);
+    int y = convertIndexToPoint(squareY);
+    stroke(CROSS_COLOR);
+    strokeWeight(STROKE_WEIGHT);
+    int delta = (SCREEN_WIDTH/3 - noughtWidth)/2; // don't draw the cross right over the grid square
+    line(x + delta, y + delta, x + squareWidth - delta, y + squareWidth - delta);
+    line(x + delta, y + squareWidth - delta, x + squareWidth - delta, y + delta);
+  }
+
+  void drawPreviewFromMousePosition(GameState state, int mouseX, int mouseY) {
+    // find the topleft corner of the square containing the mouse
+    int x = convertPointToIndex(mouseX);
+    int y = convertPointToIndex(mouseY);
+
+    // highlight the whole square, if empty
+    if (state.isEmpty(x, y)) {
+      stroke(GRID_COLOR);
+      strokeWeight(STROKE_WEIGHT);
+      fill(BACKGROUND_HIGHLIGHT_COLOR);
+      int squareX = convertIndexToPoint(x);
+      int squareY = convertIndexToPoint(y);
+      rect(squareX, squareY, squareWidth, squareWidth);
+    }
+  }
+
+  // convert the x or y screen coordinate to the index of the grid square containing it
+  int convertPointToIndex(int c) {
+    if (c < squareWidth) {
+      return 0;
+    }
+    else if (c < 2*squareWidth) {
+      return 1;
+    }
+    else {
+      return 2;
+    }
+  }
+
+  // convert from a grid square index to the screen point at the top or left of the grid square
+  int convertIndexToPoint(int i) {
+    return i * squareWidth;
+  }
+  
+  // draw only the grid
+  void drawGrid() {
+    // draw with a thick, black line
+    stroke(GRID_COLOR);
+    strokeWeight(STROKE_WEIGHT);
+  
+    // the line() function draws a line
+    // line(x1,y1,x2,y2) draws a line from (x1,y1) to (x2,y2)
+    // the first line here is horizontal, 1/3 down the screen
+    line(0, SCREEN_WIDTH/3, SCREEN_WIDTH, SCREEN_WIDTH/3);
+    line(0, 2*SCREEN_WIDTH/3, SCREEN_WIDTH, 2*SCREEN_WIDTH/3);
+    line(SCREEN_WIDTH/3, 0, SCREEN_WIDTH/3, SCREEN_WIDTH);
+    line(2*SCREEN_WIDTH/3, 0, 2*SCREEN_WIDTH/3, SCREEN_WIDTH);
+  }
+}
+

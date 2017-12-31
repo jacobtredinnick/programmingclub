@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Connect Four Grid</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Connect Four Grid</h1>
+		<h3>Task</h3>
+		<p>
+		<b>Draw the Connect Four grid.</b><br>
+		In this challenge we will draw the grid like the one used in the Connect Four game:<br>
+		<img src="/programmingclub/img/connectFourPhysical.jpg" width="500"/>
+		</p>
+		<p>
+		The grid has <b>6 rows</b> and <b>7 columns</b>.
+		For now we'll keep it simple and just draw the grid on the whole of the drawing area.  We can come back later and make it look a bit better...<br><br>
+		<img src="/programmingclub/img/connectFourGrid.png" width="500"/>
+		</p>
+		<h3>Tools</h3>
+		<p>
+		Use the <code><b>background</code></b> function to draw a blue rectangle and then use the <code><b>ellipse</code></b> function 
+		draw white circles with the right diameter and spacing to make the 6x7 grid for the game.
+		</p>
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<pre><code><b>
+int SLOT_DIAMETER=80;
+int SLOT_SPACING=100;
+int GRID_WIDTH=700;
+int GRID_HEIGHT=600;
+size(GRID_WIDTH, GRID_HEIGHT);
+background(#0B0EB2); // a blue picked from Tools > Color Selector
+
+int slotSpacing = 100;
+int firstPos = slotSpacing / 2;
+for (int i = 0; i < 7; i++) { // for each column
+  for (int j = 0; j < 6; j++) { // for each row
+    int x = firstPos + i*SLOT_SPACING;
+    int y = firstPos + j*SLOT_SPACING;
+    ellipse(x, y, SLOT_DIAMETER, SLOT_DIAMETER);    
+  }
+}
+		</pre></code></b>
+		</div>
+	</body>
+</html>

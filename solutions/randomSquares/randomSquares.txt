@@ -1,0 +1,44 @@
+// Random Squares: Draws squares with random position, size and colour
+
+// Constants are variables that never change.  Like the radius of the ball in our animation.
+// By convention we use capitals in the variable names to show this.
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
+int MAX_WIDTH = 100;
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  smooth();
+  background(0);
+}
+
+void draw() {
+  // make the next square a random colour
+  randomizeFill();
+
+  // pick a random point on the screen to draw the square
+  // a "float" is a number that might not be a whole number
+  // we need to use a float here because that is what the random() function returns
+  float x = random(SCREEN_WIDTH); // random number between 0 and SCREEN_WIDTH
+  float y = random(SCREEN_HEIGHT); // random number between 0 and SCREEN_HEIGHT
+
+  // pick a random width, but not bigger than the maximum
+  float width = random(MAX_WIDTH);
+  
+  // draw the square at the random position
+  // the rect function will draw a square if width and height are the same
+  rect(x,y,width,width);
+}
+
+// note that we can write our own functions
+// this is useful if we want to do something more than once, or just to make it easier to read the rest of the program
+// the function name should describe what it does
+// the "void" part before the name means that the function does return anything to the caller
+// don't worry about the () part after the name for now - this will be explained later!
+void randomizeFill()
+{
+  float r = random(255); // red part is a random number 0-255
+  float g = random(255); // green part is a random number 0-255
+  float b = random(255); // blue part is a random number 0-255
+  fill(r,g,b); // combining the 3 random numbers gives a random RGB code so a random colour
+}

@@ -1,0 +1,99 @@
+int SCREEN_WIDTH=800;
+int SCREEN_HEIGHT=600;
+color BACKGROUND_COLOR = color(0); // black
+
+Snowflake snowFlake;
+
+void setup()
+{
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  smooth();
+
+  snowFlake = new Snowflake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, 250);
+
+  float c = cos(0);
+  float y0 = SCREEN_HEIGHT/2 + c * 50;
+}
+
+void draw()
+{
+  drawBackground();
+  snowFlake.draw();
+}
+
+void drawBackground()
+{
+  background(BACKGROUND_COLOR);
+}
+
+class Snowflake {
+  // configurable
+  float x;
+  float y;
+  float innerRadius;
+  float outerRadius;
+  
+  // hard coded
+  color flakeColor = color(255); // what else?
+  
+  Snowflake(float x, float y, float innerRadius, float outerRadius)
+  {
+    this.x = x;
+    this.y = y;
+    this.innerRadius = innerRadius;
+    this.outerRadius = outerRadius;
+  }
+  
+  void draw()
+  {
+    // get ready to draw
+    stroke(flakeColor);
+    strokeWeight(innerRadius/10);
+    noFill();
+
+    // draw the inner circle
+    ellipse(x, y, 2*innerRadius, 2*innerRadius);
+
+    // draw the 6 long lines
+    for (int i = 0; i < 6; ++i) {
+      // work out where to draw the line
+      // who has done trigonometry in maths then?
+      float r = i * TWO_PI/6; // radians - need to use these for sin & cos to work properly, a full circle is TWO_PI radians
+      float x0 = getFlakeCircleX(r, innerRadius);
+      float y0 = getFlakeCircleY(r, innerRadius);
+      float x1 = getFlakeCircleX(r, outerRadius);
+      float y1 = getFlakeCircleY(r, outerRadius);
+      
+      // draw the line
+      line(x0, y0, x1, y1);
+      
+      // a circle on the end of each line
+      fill(flakeColor);
+      ellipse(x1, y1, innerRadius/2, innerRadius/2);
+    }
+    
+    // draw the six short lines between the long lines
+    for (int i = 0; i < 6; ++i) {
+      float r = (i + 0.5) * TWO_PI/6; // i + 0.5 will be half way round the circle between the long lines at i and i + 1
+      float x0 = getFlakeCircleX(r, innerRadius);
+      float y0 = getFlakeCircleY(r, innerRadius);
+      float x1 = getFlakeCircleX(r, outerRadius/2);
+      float y1 = getFlakeCircleY(r, outerRadius/2);
+      
+      // draw the line
+      line(x0, y0, x1, y1);
+    }
+  }
+  
+  // get the x coordinate of the snowflake based on the x position of the flake, the angle in radians and the distance required from the centre
+  float getFlakeCircleX(float radians, float distanceFromCenter)
+  {
+    return x + cos(radians) * distanceFromCenter;
+  }
+
+  float getFlakeCircleY(float radians, float distanceFromCenter)
+  {
+    return y + sin(radians) * distanceFromCenter;
+  }
+}
+

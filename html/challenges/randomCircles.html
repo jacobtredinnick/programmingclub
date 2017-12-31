@@ -1,0 +1,134 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Random Circles</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Random Circles</h1>
+
+		<h3>Task</h3>
+		<p><b>Draw lots of circles with random position, width and color</b><p></p>
+		<img src="/programmingclub/img/randomCircles.png"/>
+
+		<h3>Objective</h3>
+		<p><b>Learn about the random() function</b></p>
+		Using random() in programs is sometimes needed for games and is also good to generate interesting images.
+
+		<h3>Tools</h3>
+		<li>The <b><a href="http://processing.org/reference/random_">random()</a></b> function generates a random number</li><p></p>
+		<li>The <b><a href="http://processing.org/reference/ellipse_">ellipse()</a></b> function draws an ellipse with a specified position, width and height.  A circle is an ellipse whose width and height are the same</li><p></p>
+		<li><b>Hint:</b> The program below draws <b>squares</b> with random position, width and colour.  This is explained in the comments.  Change it to draw circles instead of squares:</li><p></p>
+
+		<pre><code><b>
+// Random Squares: Draws squares with random position, size and colour
+
+// Constants are variables that never change.  Like the radius of the ball in our animation.
+// By convention we use capitals in the variable names to show this.
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
+int MAX_WIDTH = 100;
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  smooth();
+  background(0);
+}
+
+void draw() {
+  // make the next square a random colour
+  randomizeFill();
+
+  // pick a random point on the screen to draw the square
+  // a "float" is a number that might not be a whole number
+  // we need to use a float here because that is what the random() function returns
+  float x = random(SCREEN_WIDTH); // random number between 0 and SCREEN_WIDTH
+  float y = random(SCREEN_HEIGHT); // random number between 0 and SCREEN_HEIGHT
+
+  // pick a random width, but not bigger than the maximum
+  float width = random(MAX_WIDTH);
+  
+  // draw the square at the random position
+  // the rect function will draw a square if width and height are the same
+  rect(x,y,width,width);
+}
+
+// note that we can write our own functions
+// this is useful if we want to do something more than once, or just to make it easier to read the rest of the program
+// the function name should describe what it does
+// the "void" part before the name means that the function does return anything to the caller
+// don't worry about the () part after the name for now - this will be explained later!
+void randomizeFill()
+{
+  float r = random(255); // red part is a random number 0-255
+  float g = random(255); // green part is a random number 0-255
+  float b = random(255); // blue part is a random number 0-255
+  fill(r,g,b); // combining the 3 random numbers gives a random RGB code so a random colour
+}
+		</pre></code></b>
+
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<pre><code><b>
+// Random Circles: Draws circles with random position, size and colour
+
+// Constants are variables that never change.  Like the radius of the ball in our animation.
+// By convention we use capitals in the variable names to show this.
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
+int MAX_WIDTH = 100;
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  smooth();
+  background(0);
+}
+
+void draw() {
+  // make the next circle a random colour
+  randomizeFill();
+
+  // pick a random point on the screen to draw the circle
+  // a "float" is a number that might not be a whole number
+  // we need to use a float here because that is what the random() function returns
+  float x = random(SCREEN_WIDTH); // random number between 0 and SCREEN_WIDTH
+  float y = random(SCREEN_HEIGHT); // random number between 0 and SCREEN_HEIGHT
+
+  // pick a random width, but not bigger than the maximum
+  float width = random(MAX_WIDTH);
+<font color="green">  
+  // draw the circle at the random position
+  // the ellipse function will draw a circle if width and height are the same
+  ellipse(x,y,width,width);
+</font>  
+}
+
+// note that we can write our own functions
+// this is useful if we want to do something more than once, or just to make it easier to read the rest of the program
+// the function name should describe what it does
+// the "void" part before the name means that the function does return anything to the caller
+// don't worry about the () part after the name for now - this will be explained later!
+void randomizeFill()
+{
+  float r = random(255); // red part is a random number 0-255
+  float g = random(255); // green part is a random number 0-255
+  float b = random(255); // blue part is a random number 0-255
+  fill(r,g,b); // combining the 3 random numbers gives a random RGB code so a random colour
+}
+		</pre></code></b>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+// make the sketch window a bit bigger
+size(600, 400);
+
+// make the sketch window background black
+background(0);
+
+// smooth() makes everything look a bit smoother, but take a bit longer
+smooth();
+
+// draw a red rectangle
+// fill() sets the color of the next thing to be drawn
+// here it is a "red/green/blue" (RGB) color code for bright red
+fill(255,0,0);
+rect(50,50,500,100);
+
+// draw some white text on top of the rectangle
+// fill() with just one number sets all red/green/blue to maximum
+// this means white
+fill(255);
+textSize(48);
+text("Hello Processing!", 100, 100);
+

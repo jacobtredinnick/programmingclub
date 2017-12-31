@@ -1,0 +1,91 @@
+// noughtsAndCrossesHumanMove - allow 1 mouse move for the human (noughts)
+
+int SCREEN_WIDTH = 600; // this game assumes a square screen!
+int NOUGHT_WIDTH = 120;
+
+// colour objects - sorry but we have to use the American spelling "color" for these!
+color BACKGROUND_COLOR = color(170,200,200);
+color BACKGROUND_HIGHLIGHT_COLOR = color(190,220,220);  // just a little lighter than the background
+color GRID_COLOR = color(0); // black
+color NOUGHT_COLOR = color(0,150,0); // dark grey
+
+int STROKE_WEIGHT=10; // everything is drawn with a thick line for now
+
+boolean humanMove = true; // human always moves first for now
+
+// x,y coordinates of square containing the nought, -1 means not yet placed
+int noughtX = -1;
+int noughtY = -1;
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_WIDTH);
+  smooth();
+}
+
+void draw() {
+  // clear everything
+  background(BACKGROUND_COLOR);
+
+  // draw the grid
+  drawGrid();
+  
+  // draw any noughts
+  drawNoughts();
+  
+  // if the human is moving, highlight the square currently containing the mouse
+  if (humanMove) {
+    drawPreviewFromMousePosition();
+  }
+}
+
+// called by Processing when the mouse is clicked
+void mouseClicked() {
+  if (humanMove) {
+    // set the nought variables to the topleft corner of the square containing the mouse
+    noughtX = mouseSquareCorner(mouseX);
+    noughtY = mouseSquareCorner(mouseY);
+    
+    // and now it will be the computer's turn next...
+    humanMove = false;
+  }
+}
+
+void drawNoughts() {
+  // well - we can only have 0 or 1 noughts in the game, so far...
+  if (noughtX != -1) {
+    // we have a nought - draw it
+  }
+}
+
+void drawPreviewFromMousePosition() {
+  // find the topleft corner of the square containing the mouse
+  int squareX = mouseSquareCorner(mouseX);
+  int squareY = mouseSquareCorner(mouseY);
+
+  // highlight the whole square
+}
+
+// work out the x or y coordinate of the square containing the specified coordinate
+int mouseSquareCorner(int c) {
+  if (c < SCREEN_WIDTH/3) {
+    return 0;
+  }
+  else if (c < 2*SCREEN_WIDTH/3) {
+    return SCREEN_WIDTH/3;
+  }
+  else {
+    return 2*SCREEN_WIDTH/3;
+  }
+}
+
+void drawGrid() {
+  // draw with a thick, black line
+  stroke(GRID_COLOR);
+  strokeWeight(STROKE_WEIGHT);
+  
+  int gridWidth = SCREEN_WIDTH/3; // the width of each square
+  line(0, gridWidth, SCREEN_WIDTH, gridWidth); // top horizontal line
+  line(0, 2*gridWidth, SCREEN_WIDTH, 2*gridWidth); // bottom horizontal line
+  line(gridWidth, 0, gridWidth, SCREEN_WIDTH); // left vertical line
+  line(2*gridWidth, 0, 2*gridWidth, SCREEN_WIDTH); // right vertical line
+}

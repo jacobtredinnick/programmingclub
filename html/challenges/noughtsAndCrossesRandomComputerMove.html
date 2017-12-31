@@ -1,0 +1,364 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Noughts And Crosses - Random Computer Move</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Noughts And Crosses - Random Computer Move</h1>
+
+		<h3>Task</h3>
+		<p><b>Make the computer play a single random move, after the human has moved:</b><p></p>
+		<img src="/programmingclub/img/noughtsAndCrossesRandomComputerMove.png"/><p></p>
+
+		This task breaks down into the following items:
+		<li>Adapt the game so far to add a move for the computer</li>
+		<li>Choose a random square that is not occupied by the nought</li>
+		<li>Draw a cross in the square</li>
+
+		<h3>Objective</h3>
+		<p><b>Make the computer move when the game is ready</b></p>
+
+		<h3>Tools</h3>
+
+		<li>The <b><a href="http://processing.org/reference/logicalAND">&&</a></b> (logical AND) operator is used to <b>AND</b> logical conditions together:</li><p></p>
+		<pre><code><b>
+  if (noughtX != -1 && noughtY != -1) {
+		</pre></code></b>
+
+		<li>The <b><a href="http://processing.org/reference/while">while</a></b> loop carries on looping while a condition is true.  Like a simplified <b>for</b> loop</li><p></p>
+		<li>The <b><a href="http://processing.org/reference/logicalAND">||</a></b> (logical OR) operator is used to <b>OR</b> logical conditions together:</li><p></p>
+		<pre><code><b>
+  // here is where the computer chooses where to move
+  // for now it is a random square not already occupied
+  while (crossX == -1 || isNoughtInSquare(crossX, crossY)) {
+		</pre></code></b>
+
+		<li><b>Hint:</b> The program below does everything except drawing the cross.  Fill in the highlighted part to complete the challenge (it's getting quite big now isn't it?):</li><p></p>
+		<pre><code><b>
+// noughtsAndCrossesRandomComputerMove - allow 1 mouse move for the human (noughts) and 1 random move for the computer (crosses)
+
+int SCREEN_WIDTH = 600; // this game assumes a square screen!
+int NOUGHT_WIDTH = 120;
+
+// colour objects - sorry but we have to use the American spelling "color" for these!
+color BACKGROUND_COLOR = color(170,200,200);
+color BACKGROUND_HIGHLIGHT_COLOR = color(190,220,220);  // just a little lighter than the background
+color GRID_COLOR = color(0); // black
+color NOUGHT_COLOR = color(0,150,0); // green
+color CROSS_COLOR = color(150,0,0); // red
+
+int STROKE_WEIGHT=10; // everything is drawn with a thick line for now
+
+boolean humanMove = true; // human always moves first for now
+
+// x,y coordinates of square containing the nought, -1 means not yet placed
+int noughtX = -1;
+int noughtY = -1;
+
+// x,y coordinates of square containing the cross, -1 means not yet placed
+int crossX = -1;
+int crossY = -1;
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_WIDTH);
+  smooth();
+}
+
+void draw() {
+  // clear everything
+  background(BACKGROUND_COLOR);
+
+  // draw the grid
+  drawGrid();
+  
+  // draw any noughts
+  drawNoughts();
+  
+  // draw any Crosses
+  drawCrosses();
+  
+  // if the human is moving, highlight the square currently containing the mouse
+  // mouseClicked handles the actual move
+  if (humanMove) {
+    drawPreviewFromMousePosition();
+  }
+  else {
+    handleComputerMove();
+  }
+}
+
+// called by Processing when the mouse is clicked
+void mouseClicked() {
+  if (humanMove) {
+    // set the nought variables to the topleft corner of the square containing the mouse
+    noughtX = mouseSquareCorner(mouseX);
+    noughtY = mouseSquareCorner(mouseY);
+    
+    // and now it will be the computer's turn next...
+    humanMove = false;
+  }
+}
+
+void drawNoughts() {
+  // well - we can only have 0 or 1 noughts in the game, so far...
+  if (noughtX != -1 && noughtY != -1) {
+    stroke(NOUGHT_COLOR);
+    strokeWeight(STROKE_WEIGHT);
+    ellipse(noughtX + SCREEN_WIDTH/6, noughtY + SCREEN_WIDTH/6, NOUGHT_WIDTH, NOUGHT_WIDTH);
+  }
+}
+
+void drawCrosses() {
+  // well - we can only have 0 or 1 crosses in the game, so far...
+  if (crossX != -1 && crossY != -1) {
+    <font color="green">// draw the cross</font>
+  }
+}
+
+void handleComputerMove() {
+  // here is where the computer chooses where to move
+  // for now it is a random square not already occupied
+  while (crossX == -1 || isNoughtInSquare(crossX, crossY)) {
+    // choose a random integer 0,1 or 2 for each of x and y
+    // convert these integers to the top / left of the corresponding square
+    crossX = randomInteger(0,2) * SCREEN_WIDTH/3;
+    crossY = randomInteger(0,2) * SCREEN_WIDTH/3;
+
+    // this function just needs to set the value of crossX and crossY in order to break out of the while loop
+    // another function draws the cross later...
+  }
+}
+
+// is the square starting at x,y occupied by a nought?
+boolean isNoughtInSquare(int x, int y) {
+   return x == noughtX && y == noughtY;
+}
+
+// pick a random integer between from and to
+// based on the built in random function that picks a random float within a range
+int randomInteger(int from, int to)
+{
+  // pick a random float in the range from --> (to + 1)
+  float r = random(from, to+1);
+
+  // pick the corresponding integer
+  // we could use a "cast" or "round()" here but this needs some care
+  for (int i = from; i < to+1; i++) {
+    if (r >= i && r <= i+1) { // good enough here
+      return i;
+    }
+  }
+  
+  return from;
+}
+
+void drawPreviewFromMousePosition() {
+  // find the topleft corner of the square containing the mouse
+  int squareX = mouseSquareCorner(mouseX);
+  int squareY = mouseSquareCorner(mouseY);
+
+  // highlight the whole square
+  strokeWeight(STROKE_WEIGHT);
+  fill(BACKGROUND_HIGHLIGHT_COLOR);
+  rect(squareX, squareY, SCREEN_WIDTH/3, SCREEN_WIDTH/3);
+}
+
+// work out the x or y coordinate of the square containing the specified coordinate
+int mouseSquareCorner(int c) {
+  if (c < SCREEN_WIDTH/3) {
+    return 0;
+  }
+  else if (c < 2*SCREEN_WIDTH/3) {
+    return SCREEN_WIDTH/3;
+  }
+  else {
+    return 2*SCREEN_WIDTH/3;
+  }
+}
+
+void drawGrid() {
+  // draw with a thick, black line
+  stroke(GRID_COLOR);
+  strokeWeight(STROKE_WEIGHT);
+  
+  int gridWidth = SCREEN_WIDTH/3; // the width of each square
+  line(0, gridWidth, SCREEN_WIDTH, gridWidth); // top horizontal line
+  line(0, 2*gridWidth, SCREEN_WIDTH, 2*gridWidth); // bottom horizontal line
+  line(gridWidth, 0, gridWidth, SCREEN_WIDTH); // left vertical line
+  line(2*gridWidth, 0, 2*gridWidth, SCREEN_WIDTH); // right vertical line
+}
+		</pre></code></b>
+
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<pre><code><b>
+// noughtsAndCrossesGridLine - start of a noughts and crosses grid
+
+int SCREEN_WIDTH = 600; // this game assumes a square screen!
+int NOUGHT_WIDTH = 120;
+
+// colour objects - sorry but we have to use the American spelling "color" for these!
+color BACKGROUND_COLOR = color(170,200,200);
+color BACKGROUND_HIGHLIGHT_COLOR = color(190,220,220);  // just a little lighter than the background
+color GRID_COLOR = color(0); // black
+color NOUGHT_COLOR = color(0,150,0); // green
+color CROSS_COLOR = color(150,0,0); // red
+
+int STROKE_WEIGHT=10; // everything is drawn with a thick line for now
+
+boolean humanMove = true; // human always moves first for now
+
+// x,y coordinates of square containing the nought, -1 means not yet placed
+int noughtX = -1;
+int noughtY = -1;
+
+// x,y coordinates of square containing the cross, -1 means not yet placed
+int crossX = -1;
+int crossY = -1;
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_WIDTH);
+  smooth();
+}
+
+void draw() {
+  // clear everything
+  background(BACKGROUND_COLOR);
+
+  // draw the grid
+  drawGrid();
+  
+  // draw any noughts
+  drawNoughts();
+  
+  // draw any Crosses
+  drawCrosses();
+  
+  // if the human is moving, highlight the square currently containing the mouse
+  // mouseClicked handles the actual move
+  if (humanMove) {
+    drawPreviewFromMousePosition();
+  }
+  else {
+    handleComputerMove();
+  }
+}
+
+// called by Processing when the mouse is clicked
+void mouseClicked() {
+  if (humanMove) {
+    // set the nought variables to the topleft corner of the square containing the mouse
+    noughtX = mouseSquareCorner(mouseX);
+    noughtY = mouseSquareCorner(mouseY);
+    
+    // and now it will be the computer's turn next...
+    humanMove = false;
+  }
+}
+
+void drawNoughts() {
+  // well - we can only have 0 or 1 noughts in the game, so far...
+  if (noughtX != -1 && noughtY != -1) {
+    stroke(NOUGHT_COLOR);
+    strokeWeight(STROKE_WEIGHT);
+    ellipse(noughtX + SCREEN_WIDTH/6, noughtY + SCREEN_WIDTH/6, NOUGHT_WIDTH, NOUGHT_WIDTH);
+  }
+}
+
+void drawCrosses() {
+  // well - we can only have 0 or 1 crosses in the game, so far...
+  if (crossX != -1 && crossY != -1) {
+    <font color="green">// draw the cross
+    stroke(CROSS_COLOR);
+    strokeWeight(STROKE_WEIGHT);
+    int delta = (SCREEN_WIDTH/3 - NOUGHT_WIDTH)/2; // don't draw the cross right over the grid square
+    line(crossX + delta, crossY + delta, crossX + SCREEN_WIDTH/3 - delta, crossY + SCREEN_WIDTH/3 - delta);
+    line(crossX + delta, crossY + SCREEN_WIDTH/3 - delta, crossX + SCREEN_WIDTH/3 - delta, crossY + delta);</font>
+  }
+}
+
+void handleComputerMove() {
+  // here is where the computer chooses where to move
+  // for now it is a random square not already occupied
+  while (crossX == -1 || isNoughtInSquare(crossX, crossY)) {
+    crossX = randomInteger(0,2) * SCREEN_WIDTH/3;
+    crossY = randomInteger(0,2) * SCREEN_WIDTH/3;
+  }
+}
+
+// is the square starting at x,y occupied by a nought?
+boolean isNoughtInSquare(int x, int y) {
+   return x == noughtX && y == noughtY;
+}
+
+// pick a random integer between from and to
+// based on the built in random function that picks a random float within a range
+int randomInteger(int from, int to)
+{
+  // pick a random float in the range from --> (to + 1)
+  float r = random(from, to+1);
+
+  // pick the corresponding integer
+  // we could use a "cast" or "round()" here but this needs some care
+  for (int i = from; i < to+1; i++) {
+    if (r >= i && r <= i+1) { // good enough here
+      return i;
+    }
+  }
+  
+  return from;
+}
+
+void drawPreviewFromMousePosition() {
+  // find the topleft corner of the square containing the mouse
+  int squareX = mouseSquareCorner(mouseX);
+  int squareY = mouseSquareCorner(mouseY);
+
+  // highlight the whole square
+  strokeWeight(STROKE_WEIGHT);
+  fill(BACKGROUND_HIGHLIGHT_COLOR);
+  rect(squareX, squareY, SCREEN_WIDTH/3, SCREEN_WIDTH/3);
+}
+
+// work out the x or y coordinate of the square containing the specified coordinate
+int mouseSquareCorner(int c) {
+  if (c < SCREEN_WIDTH/3) {
+    return 0;
+  }
+  else if (c < 2*SCREEN_WIDTH/3) {
+    return SCREEN_WIDTH/3;
+  }
+  else {
+    return 2*SCREEN_WIDTH/3;
+  }
+}
+
+void drawGrid() {
+  // draw with a thick, black line
+  stroke(GRID_COLOR);
+  strokeWeight(STROKE_WEIGHT);
+  
+  int gridWidth = SCREEN_WIDTH/3; // the width of each square
+  line(0, gridWidth, SCREEN_WIDTH, gridWidth); // top horizontal line
+  line(0, 2*gridWidth, SCREEN_WIDTH, 2*gridWidth); // bottom horizontal line
+  line(gridWidth, 0, gridWidth, SCREEN_WIDTH); // left vertical line
+  line(2*gridWidth, 0, 2*gridWidth, SCREEN_WIDTH); // right vertical line
+}
+		</pre></code></b>
+		</div>
+	</body>
+</html>

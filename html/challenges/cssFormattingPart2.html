@@ -1,0 +1,103 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : CSS Formatting</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<script language="javascript" src="file://d:/Jake/docs/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</div>
+		<h1>Challenge - CSS Formatting - Part 2</h1>
+		
+		
+		<h3>Introduction</h3>
+		
+		<p>CSS lets us style elements to look however we like by adding the "style" attribute, but adding it to every HTML tag is tedious and repetitive.</p>
+		
+		<p>You can define your styles once and then apply them to your HTML like this...</p>
+
+		<xmp>
+        <html>
+        <head>
+        <style>
+        /* Apply styles to HTML elements by type */
+        H1 {color:Orange}
+        p {color:green;border-color:yellow}
+        
+        /* Apply styles to all HTML elements with the same "class" */
+        .big {font-size:36px}
+        .small {font-size:8px}
+        .red {color:red}
+        
+        /* Apply styles to specific HTML elements by ID */
+        #into {font-size:36px; color:blue}
+        #main {font-size:8px; font-family:Arial}
+        
+        </style>
+        </head>
+        <body>
+		<h1>My Header</h1>
+        <p>This is a paragraph.</p>
+		<p class="big">This is big a paragraph.</p>
+		<p class="small">This is a small paragraph.</p>
+		
+        <p id="intro" >This is another big paragraph.</p>
+		<p id="main" class="small">What size and color am I?</p>
+        </body>
+        </html>
+  		</xmp>
+        
+        <p>See how it work by opening this page <a href="/programmingclub/examples/cssFormattingPart2/css2.html" target="_blank">css2.html</a>. Open the page and take a look inside (or select View>Source in your browser to see the HTML).</p>
+        <p>Use "class=name" and a style called ".name" when you want to affect more than one thing on a page.</p>
+        <p>Use "id=name" and a style called "#name" when you want to affect something specific on a page.</p>
+		<h3>Task</h3>
+		<p>Change the page that you used in the last exercise. Move your styles into a "style" section and use classes or id's to link them to your HTML elements</p>
+
+
+
+		<h3>Objective</h3>
+        <p>Write better pages by putting your styles into a &lt;style&gt; section in the &lt;head&gt; of the page.</p>
+	
+        <h3>Tools</h3>
+		<p>
+		For now, just follow the steps to show the example page in the browser and read the HTML text shown below to see how each part is rendered.
+		</p>
+		<li><b>Step 1 : Open your previous HTML file</b></li>
+		<p>
+		Open your text editor (we can use Notepad for now) and create a new file.
+		</p>
+		<li><b>Step 2 : Remove the "style" attributes from each tag, add the style section, classes and id's. </b></li>
+
+		<xmp>
+        <html>
+        <head>
+        <style>
+        .intro {font-weight:bold}
+        </style>
+        </head>
+        <body>
+         <p class="intro">hello</p>
+        </body>
+        </html>
+		</xmp>
+		<p>Save the file to something like "css2ex.html" in a directory that you have access to.</p>
+		<li><b>Step 3 : Open the file in your browser</b></li>
+		<p>
+		Double click the file you just created.  It should open up in your browser.
+		</p>
+		<li><b>Step 4 : Try to understand what the code does</b></li>
+		<p>Read through the code.  Look at the browser.  Try changing a few things to check your understanding.</p>
+
+	</body>
+</html>

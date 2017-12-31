@@ -1,0 +1,77 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Random Ball</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div>
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Random Ball</h1>
+
+		<h3>Objective</h3>
+		<p><b>Make an animation bounce in different straight lines</b></p>
+
+		<h3>Task</h3>
+		<li><b>Easy:</b> Complete the starter animation to make the ball start in a random direction and of off screen</li>
+		<li><b>Medium:</b> Make the random ball bounce off all edges</li>
+		<li><b>Hard:</b> Make random ball always have the same starting speed whatever the random direction is</li>
+
+		<h3>Tools</h3>
+		<p>
+		<p>The <a href="/programmingclub/examples/randomBallStarterProgram/randomBallStarterProgram.txt">
+		starter</a> program has a ball animation where the ball starts in the center and moves off the screen in a fixed direction.</p>
+		<h4>Easy Challenge hints</h4>
+		<p>The initial direction of the ball is currently fixed as an X and Y velocity, before the setup() function:<p>
+		<pre><code><b>
+// Ball velocity.  This is used to change the position of the ball in every frame.
+int velocityX = 4;
+int velocityY = 5;
+		</pre></code></b>
+		<p>To make this direction random, use the random() function to initialize velocityX and velocityY to a random number between, say, -5 and 5.</p>
+		<h4>Medium Challenge hints</h4>
+		<p>To make the ball bounce off all edges, we need to handle hitting the edge in the draw() function, a bit like we did in the <a href="/programmingclub/html/challenges/bouncingBall.html">Bouncing Ball</a> challenge:</p>
+		<pre><code><b>
+  if (ballY >= SCREEN_HEIGHT - BALL_WIDTH/2) {
+    velocityY = -velocityY
+  }
+		</pre></code></b>
+  		<p>The difference is that our velocity now has both an x and a y component (for those that have done it in maths it is a <b>vector</b>):</p>
+		<img src="/file:///d:/Jake/docs/programmingclub/website/img/bouncingBallVectors.1.png"/>
+		<p>Actually the code for the bounce is very similar, to bounce off a top or bottom edge we reverse the only the y component of the velocity:</p>
+		<img src="/programmingclub/img/bouncingBallVectors.2.png"/>
+		<p>To bounce off a side we reverse only the x part.</p>
+		<h4>Hard Challenge hints</h4>
+        <p>Our program starts with the velocity random in both X and Y directions.  This means sometimes the ball moves slowly, sometimes faster, in a random direction overall.</p>
+        <p>The velocityX and velocityY variables therefore represent a <b>vector</b> for the velocity: It has both a size and a direction.</p>
+  		<p>To make a vector a fixed size while keeping the same direction, we must do the following:</p>
+  		<li><b>Normalize</b> it.  This means make its length 1, but keep the same direction</li>
+  		<li><b>Scale</b> it to our fixed velocity by multiplying the x and y part by the length we want</li>
+  		<p>Here how to normalize and scale the values of velocityX and velocityY in our program (luckily Processing already has a function for that).  You will need to call this from setup():</p>
+		<pre><code><b>
+  PVector v = new PVector(velocityX, velocityY);
+  v.normalize();
+  velocityX = v.x * VELOCITY;
+  velocityY = v.y * VELOCITY;
+		</pre></code></b>
+  		<p><b>Don't worry if you didn't understand this part.  You might not have done vectors yet in school!</b></p>
+  		<p>Maybe you have studied vectors and wondered what they are used for?  This program is just one small example.  If you play any sort of game there are probably thousands of vector calculations like these and others every second...</p>
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<li>Easy challenge <a href="/programmingclub/solutions/randomBallEasy/randomBallEasy.txt">solution</a></li>
+		<li>Medium challenge <a href="/programmingclub/solutions/randomBallMedium/randomBallMedium.txt">solution</a></li>
+		<li>Hard challenge <a href="/programmingclub/solutions/randomBallHard/randomBallHard.txt">solution</a></li>
+		</div>
+	</body>
+</html>

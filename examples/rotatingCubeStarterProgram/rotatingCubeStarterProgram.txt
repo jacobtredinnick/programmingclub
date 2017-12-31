@@ -1,0 +1,22 @@
+// rotations are all done in "radians"
+// if you've not done these yet in maths - don't worry but PI radians is 180 degrees!
+// if you don't know what PI is (it's roughly 3.14) then just give it a try anyway ;)
+final float ROTATION_PER_FRAME = .01; // change in rotation in each frame
+float rotation = 0; // current rotation value
+
+void setup(){
+  size(800, 800, P3D);
+  noStroke();
+}
+
+void draw(){
+  background(0); // makes the background black
+  lights(); // turns on some fancy 3d effects
+  
+  translate(400,400); // makes the box draw with centre here
+  rotateX(rotation); // makes the box draw with a specific rotation
+  box(250); // draws a 3D box - 1 parameter makes it a cube
+  
+  rotation += ROTATION_PER_FRAME; // increases the rotation with which to draw the cube
+}
+

@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Keyboard Movement</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Keyboard Movement</h1>
+		<h3>Objective</h3>
+		<p><b>Use keyboard input to move an object</b></p>
+
+		<li><b>Easy:</b>Change the color, size and speed of the ball</li>
+		<li><b>Medium:</b>Use the arrow keys to allow the ball to move the ball</li>
+		<li><b>Hard:</b>Do something "interesting" when the ball moves</li>
+		<h3>Tools</h3>
+		<p>
+		<p>The <a href="/programmingclub/examples/keyboardMovementStarterProgram/keyboardMovementStarterProgram.txt">
+		starter</a> program is an animation of a ball that starts in the middle and sticks on the right of the screen.</p>
+		<h4>Easy Challenge hints</h4>
+		Look at the code for the things that we should change, change them and see what happens...
+		<h4>Medium Challenge hints</h4>
+		I forget to tell you.  There is already some code here in the starter program::
+		<pre><code><b>
+void keyPressed()
+{
+  if (keyCode == LEFT) snake.updateDirection(DIRECTION_LEFT);
+}
+		</pre></code></b>
+		Can you guess how to handle the other arrow buttons?
+		
+		<h4>Hard Challenge hints</h4>
+		I'm looking forward to seeing what you do here.  By the way, if you were wondering why we have a <b>Snake</b> in this code,
+		it's because it is the starting point of a "Snake" game.  We might come back to it later...
+		</body>
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<li>Easy challenge <a href="/programmingclub/solutions/keyboardMovementEasy/keyboardMovementEasy.txt">solution</a></li>
+		<li>Medium challenge <a href="/programmingclub/solutions/keyboardMovementMedium/keyboardMovementMedium.txt">solution</a></li>
+		<li>Hard challenge <a href="/programmingclub/solutions/keyboardMovementHard/keyboardMovementHard.txt">solution</a></li>
+		</div>
+</html>

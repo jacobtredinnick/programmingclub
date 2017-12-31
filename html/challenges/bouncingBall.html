@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Bouncing Ball</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div>
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Bouncing Ball</h1>
+		<h3>Objective</h3>
+		<p><b>Make an animation bounce vertically or horizontally</b></p>
+
+		<h3>Task</h3>
+		<p>
+		<li><b>Easy:</b> Complete the starter program to make the ball bounce off the top and bottom edges of the screen</li>
+		<li><b>Medium:</b> Make the ball move horizontally and bounce off the left and right edges of the screen</li>
+		<li><b>Hard:</b> Make the ball gradually speed up while bouncing off both sides</li>
+		<p></p>
+		</p>
+		<h3>Tools</h3>
+		<p>
+		<p>The <a href="/programmingclub/examples/bouncingBallStarterProgram/bouncingBallStarterProgram.txt">
+		starter</a> program has a ball animation where the ball starts in the center, bounces off the bottom and goes off screen at the top.</p>
+		<h4>Easy Challenge hints</h4>
+		<p>The ball already bounces off the bottom of the screen and we need to make it bounce off the top using a similar trick.<p>
+		The bounce at the bottom of the screen is done by reversing the velocityY value at the end of the draw() function:
+		<pre><code><b>
+  // reverse the ball direction if it hits the bottom edge
+  if (ballY >= SCREEN_HEIGHT - BALL_WIDTH/2) {
+    velocityY = -velocityY;
+  }
+		</pre></code></b>
+		This code is saying : <b>if</b> the y position is <b>greater than or equal to</b> (the <code><b>'>='</code></b> operator)the screen height minus half the ball width, the bottom edge of the ball hits so we must reverse direction.
+        Try adding a similar check for if the ball is at the top of the screen by using the <code><b>'<='</code></b> operator to check the ball position at the top of the screen.
+        <!-- '> -->
+		<h4>Medium Challenge hints</h4>
+		<p>The vertical animation is done in the draw() function here:
+		<pre><code><b>
+  ballY += velocityY;
+		</pre></code></b>
+  This changes the y position each time draw() is called so that we when we draw the ellipse it is at a different position.  What will have to change to move horizontally?
+		<h4>Hard Challenge hints</h4>
+  Start with either the vertical or horizontal bounce.
+  To make something go faster we must increase its velocity.  Adding something each time through the draw() should do it - but what if the velocity is negative?
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<li>Easy challenge <a href="/programmingclub/solutions/bouncingBallEasy/bouncingBallEasy.txt">solution</a></li>
+		<li>Medium challenge <a href="/programmingclub/solutions/bouncingBallMedium/bouncingBallMedium.txt">solution</a></li>
+		<li>Hard challenge <a href="/programmingclub/solutions/bouncingBallHard/bouncingBallHard.txt">solution</a></li>
+		</div>
+	</body>
+</html>

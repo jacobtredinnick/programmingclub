@@ -1,0 +1,117 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Mouse Shape</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Mouse Shape</h1>
+
+		<h3>Task</h3>
+		<p><b>Draw a rectangle that follows the mouse position:</b><p></p>
+		<img src="/programmingclub/img/mouseShape.png"/>
+		</p>
+		
+		<h3>Objective</h3>
+		<p><b>Learn about setup(), draw() and mouse position</b></p>
+		<p>Most processing programs use setup() and draw().  We will introduce them here, along with a way of using the mouse position.</p>
+
+		<h3>Tools</h3>
+		<li>The <b><a href="http://processing.org/reference/setup_">setup()</a></b> function is a special function that Processing calls once at the start of the program.</li><p></p>
+		<li>The <b><a href="http://processing.org/reference/draw_">draw()</a></b> function is a speci</li><p></p>
+		<li>The <b><a href="http://processing.org/reference/mouseX">mouseX</a></b> and <b><a href="http://processing.org/reference/mouseY">mouseY</a></b>
+		variables hold the current position of the mouse in the Processing window</li><p></p>
+		<li><b>Hint:</b> The program below shows a <b>circle</b> moving with the mouse.  This is explained in the comments.  Change it to use a rectangle instead of a circle:</li><p></p>
+
+		<pre><code><b>
+// constants don't change value during the whole program
+// By convention we use capitals for these names
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
+int CIRCLE_WIDTH = 100;
+
+// setup() is a special function in Processing
+// it is called by Processing, only once at the start of the program
+void setup()
+{
+  // using constants instead of size(800,800) makes the program easier to understand
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  
+  // the smooth() function makes graphics draw more - well - smoothly
+  // it just takes a bit longer to draw them - but you usually won't notice
+  smooth();
+}
+
+// draw() is a special function in Processing
+// it is called by Processing, many times per second
+// every time the draw function draws, it is called a "frame"
+// use draw() to animate things in the processing window, by drawing something a little different in each frame
+void draw()
+{
+  // background(0) overwrites everything black, every time draw is called (each frame)
+  background(0);
+ 
+  // the circle will be red - we've done this before
+  fill(255,0,0); 
+ 
+  // mouseX and mouseY are Processing variables that hold the current mouse position
+  // ellipse(x,y,width,height) is used to draw an ellipse at (x,y) with the specified width and height
+  // an ellipse with the same width and height is a circle
+  ellipse(mouseX, mouseY, CIRCLE_WIDTH, CIRCLE_WIDTH);
+}
+		</pre></code></b>
+
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<pre><code><b>
+// constants don't change value during the whole program
+// By convention we use capitals for these names
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
+int RECTANGLE_WIDTH = 100;
+int RECTANGLE_HEIGHT = 50;
+
+// setup() is a special function in Processing
+// it is called by Processing, only once at the start of the program
+void setup()
+{
+  // using constants instead of size(800,800) makes the program easier to understand
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  
+  // the smooth() function makes graphics draw more - well - smoothly
+  // it just takes a bit longer to draw them - but you usually won't notice
+  smooth();
+}
+
+// draw() is a special function in Processing
+// it is called by Processing, many times per second
+// every time the draw function draws, it is called a "frame"
+// use draw() to animate things in the processing window, by drawing something a little different in each frame
+void draw()
+{
+  // background(0) overwrites everything black, every time draw is called (each frame)
+  background(0);
+ 
+  // the rectangle will be red - we've done this before
+  fill(255,0,0); 
+ 
+  // mouseX and mouseY are Processing variables that hold the current mouse position
+  rect(mouseX, mouseY, RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
+}
+		</pre></code></b>
+		</div>
+	</body>
+</html>

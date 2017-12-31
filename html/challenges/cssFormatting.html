@@ -1,0 +1,159 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : CSS Formatting</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</div>
+		<h1>Challenge - CSS Formatting</h1>
+		
+		<h3>Task</h3>
+		<b>Write an HTML page that uses CSS (Cascading Style Sheets) to do the formatting.</b><br>
+
+		<h3>Objective</h3>
+		<b>Learn how to use Cascading Style Sheets (CSS)</b><br>
+		You can do lots of cool stuff with CSS - Make your pages look amazing!<br>
+		Javascript can be used to add/change CSS codes on a page. We'll be learning how to do this in a couple of lessons time.
+
+		<h3>Introduction</h3>
+		
+		<p>HTML (HyperText Markup Language) was never intended to handle the formatting of a document.</p>
+		
+		<p>It was designed to "mark-up" the document structure. E.g...</p>
+
+		<xmp>
+
+		<h1>This is a heading</h1>
+
+		<p>This is a paragraph.</p>
+
+		</xmp>
+
+		<P>The recommended way of formatting our documents is to use <b>CSS</b> (or Cascading Style Sheets)</p>
+		
+		<p>CSS defines how our HTML elements are displayed. For example...</p>
+   
+        <p style="color:green;font-size:20px">this text is big and green!</p>
+
+        <p>This is the CSS that makes it happen...
+        <xmp><p style="color:green;font-size:20px">this text is big and green!</p></xmp></p>
+
+        <p>The <code>style</code> attribute is added to the <xmp><p></xmp> tag and it holds the CSS properties &amp; values that define how it looks:</p>
+        <p><xmp>color</xmp> is the first property and <xmp>green</xmp> is its value.</p>
+        <p><xmp>font-size</xmp> is the second property and <xmp>20px</xmp> is its value (px means the number of "pixels" or dots on the screen).</p>
+
+		<h3>Tools</h3>
+
+		<li><b>Step 1 : Look at the example HTML file that uses CSS</b></li>
+		<p>
+		Go to the example page <a href="/programmingclub/examples/cssFormatting/cssIntro.html">here</a>
+		</p>
+
+		<li><b>Step 2 : Look at how the example page was made</b></li>
+		<p>
+		In your browser, click the <b>right mouse</b> on the example page and do <b>View source</b>.<br>
+		You should see a window like the one below with the HTML:<br>
+		<p><img src="/programmingclub/img/cssIntroSource.png"/><br></p>
+		Take a look at the HTML code that the browser should have shown you.  Have a look for <code>style</code> attributes used in paragraphs.<br><br>
+		<font color="green"><b>Hint:</b> You can do <b>"View source"</b> on any website, to get some ideas about how to make your own!</font>
+		</p>
+
+		<li><b>Step 3 : Try changing a few things to check your understanding</b></li>
+		<p>
+		Copy the code from the "view source" window (above) into Notepad (for now) and save a file called something like "css1.html". Double click on this file to show it in a browser.<br>
+		Try editing a few things in Notepad and refreshing in the browser to see what happens.<br>
+		<b>Making a few small changes is the best way to check your understanding of how the page has been made!</b><br><br>
+		The table below shows a few more things that can be included in a <code>style="..."</code> attribute:
+		</p>
+
+		<p>Here are a <b>few</b> CSS Properties and values to play with - try them to see what they do on your page:</p>
+
+		<table>
+			<tr style="font-weight:bold">
+				<td>Property</td>
+				<td>Values</td>
+			</tr>
+			<tr>
+				<td>border-style </td>
+				<td>none, solid, dotted, dashed, double</td>
+			</tr>
+			<tr>
+				<td>border-width </td>
+				<td>2px (try any number)</td>
+			</tr>
+			<tr>
+				<td>color</td>
+				<td>red, blue, green white, black etc</td>
+			</tr>
+			<tr>
+				<td>font-family</td>
+				<td>arial, courier new, times new roman, georgia, verdana</td>
+			</tr>
+			<tr>
+				<td>background-color</td>
+				<td>red, blue, green white, black etc</td>
+			</tr>
+			<tr>
+				<td>font-style</td>
+				<td>Italic, normal </td>
+    	    </tr>
+        	<tr>
+				<td>font-variant</td>
+				<td>normal, small-caps</td>
+        </tr>
+        <tr>
+          <td>font-weight</td>
+          <td>bold, normal, lighter, bolder,</td>
+        </tr>
+        <tr>
+          <td>line-height</td>
+          <td>10px, 20px etc</td>
+        </tr>
+        <tr>
+          <td>text-align</td>
+          <td>left, right, center</td>
+        </tr>
+        <tr>
+          <td>text-decoration</td>
+          <td>blink, line-through, none, overline, underline</td>
+        </tr>
+        <tr>
+          <td>text-transform</td>
+          <td>capitalize, lowercase, uppercase</td>
+        </tr>
+        <tr>
+          <td>vertical-align</td>
+          <td>Vertical alignment</td>
+        </tr>
+        <tr>
+          <td>margin-top</td>
+          <td>0, 10, 20 etc</td>
+        </tr>
+        <tr>
+          <td>margin-left</td>
+          <td>0, 10, 20 etc</td>
+        </tr>        
+        <tr>
+          <td>margin-right</td>
+          <td>0, 10, 20 etc</td>
+        </tr>
+        <tr>
+          <td>margin-bottom</td>
+          <td>0, 10, 20 etc</td>
+        </tr>
+       </table>
+	</body>
+</html>

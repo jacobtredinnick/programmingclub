@@ -1,0 +1,25 @@
+// noughtsAndCrossesGridLine - start of a noughts and crosses grid
+
+int SCREEN_WIDTH=600; // this game assumes a square screen for now!
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_WIDTH);
+  smooth();
+}
+
+void draw() {
+  // clear everything
+  background(170,200,200);
+
+  // draw the grid
+  drawGrid();
+}
+
+void drawGrid() {
+  strokeWeight(10); // thick line, will already be black
+  int gridWidth = SCREEN_WIDTH/3; // the width of each square
+  line(0, gridWidth, SCREEN_WIDTH, gridWidth); // top horizontal line
+  line(0, 2*gridWidth, SCREEN_WIDTH, 2*gridWidth); // bottom horizontal line
+  line(gridWidth, 0, gridWidth, SCREEN_WIDTH); // left vertical line
+  line(2*gridWidth, 0, 2*gridWidth, SCREEN_WIDTH); // right vertical line
+}

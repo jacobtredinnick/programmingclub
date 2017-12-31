@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Hello 1000 Worlds</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Hello 1000 Worlds</h1>
+		<div class="intro">
+		<h3>Task</h3>
+		<p>
+		<b>Write a program that prints 1000 lines saying "Hello World 1!", "Hello World 2!", ... up to "Hello World 1000!":</b>
+		</p>
+		<pre><code><b>
+Hello World 1!
+Hello World 2!
+Hello World 3!
+...
+Hello World 1000!
+		</pre></code></b>
+		<h3>Objective</h3>
+		<p><b>Learn about loops and variables.</b></p>
+		<p>
+		Now that you've recovered from the excitement of writing your first program, let's just quickly do it 1000 more times!<br>
+		We could do this using 1000 <code><b>println</b></code> statements with a different number in each:
+		</p>
+		</div>
+		<pre><code><b>
+println("Hello World 1!");
+println("Hello World 2!");
+println("Hello World 3!");
+...
+println("Hello World 1000!");
+		</pre></code></b>
+		But it is much less work to do this with loops and variables...
+		<h3>Tools</h3>
+
+		<li>A <b><a href="http://processing.org/reference/comment.html">comment</a></b> is a line starting with // and is ignored:</li>
+		<pre><code><b>
+// We will use comments to explain some of the tools and examples, directly in the code...
+		</pre></code></b>
+
+		<li>A <b><a href="http://processing.org/reference/for.html">for loop</a></b> to repeat other code.  For example:</li>
+		<pre><code><b>
+for (int i=1; i<=1000; i++) {
+   // This loop will repeat the things between the { and the }, 1000 times, read on to see how this works...
+}
+		</pre></code></b>
+
+		The for loop contains three parts:
+		
+		<li>An <font color="green">initialization expression</font> declares an <b><a href="http://processing.org/reference/int.html">integer variable</a></b> i to keep count, starting at 1:</li>
+		<pre><code><b>
+for (<font color="green">int i=1;</font> i<=1000; i++) {
+}
+		</pre></code></b>
+
+		
+		<li>A <font color="green">termination expression</font> stops the loop when the expression is false.  Here it stops if i is <b>not</b> <b><a href="http://processing.org/reference/lessthanorequalto.html">less than or equal to (<=) </a></b> 1000:</li>
+		<pre><code><b>
+for (int i=1; <font color="green">i<=1000</font>; i++) {
+}
+		</pre></code></b>
+		
+		<li>An <font color="green">increment expression</font> modifies the loop variable usually by incrementing it, here using the <b><a href="http://processing.org/reference/increment.html">increment</a></b> operator ++ to add 1:
+		<pre><code><b>
+for (int i=1; i<=1000; <font color="green">i++</font>) {
+   // "i++" is the same as "i = i + 1" (i++ is much quicker to type though!)
+   // Adding 1 to i each time means that the loop will run 1000 times, stopping when i is 1001 because "i <= 1000" is false
+}
+		</pre></code></b>
+
+		<li>A <font color="green">String concatenation</font> is used to join multiple strings or other variables into one string, using the <b>+</b> operator:</li>
+		<pre><code><b>
+int i = 1;
+println(<font color="green">"Hello World " + i</font>);
+		</pre></code></b>
+		<p>Output:</p>
+		<pre><code><b>
+Hello World 1
+		</pre></code></b>
+
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<pre><code><b>
+// loop 1000 times
+for (int i=1; i<=1000; i++) {
+   // concatenate a string and print it (notice that we can concatenate more than 2 things in one statement)
+   println("Hello World " + i + "!");
+}
+		</pre></code></b>
+		</div>
+	</body>
+</html>

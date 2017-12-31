@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Noughts and Crosses - Grid</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div> 
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Noughts And Crosses - Grid</h1>
+
+		<h3>Task</h3>
+		<p><b>Draw the grid for a noughts and crosses game</b><p></p>
+		The grid has 2 vertical and 2 horizontal lines making 9 equal sized squares:<p></p>
+		<img src="/programmingclub/img/noughtsAndCrossesGrid.png"/>
+
+		<h3>Objective</h3>
+		<p><b>Start work on a game</b></p>
+
+		<h3>Tools</h3>
+		<li>The <b><a href="http://processing.org/reference/line_">line()</a></b> function draws a line from (x1,y1) to (x2,y2)</li><p></p>
+		<li>The <b><a href="http://processing.org/reference/multiply">*</a></b> operator multiplies 2 numbers</li><p></p>
+		<p>Use the other functions we have already used to draw the lines and set the background color.</p>
+		<p>Look at the solutions to previous challenges or perhaps you have saved some of your other work?</p>
+		<p>As usual, you <b>can</b> take a peek at the solution below if you get really stuck.  But don't just paste it in without reading the comments - where would be the fun in that?</p>
+		There is no starter code for this example.  Good luck!
+		
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<pre><code><b>
+// noughtsAndCrossesGridLine - start of a noughts and crosses grid
+
+int SCREEN_WIDTH=600; // this game assumes a square screen for now!
+
+void setup() {
+  size(SCREEN_WIDTH, SCREEN_WIDTH);
+  smooth();
+}
+
+void draw() {
+  // clear everything
+  background(170,200,200);
+
+  // draw the grid
+  drawGrid();
+}
+
+void drawGrid() {
+  strokeWeight(10); // thick line, will already be black
+  int gridWidth = SCREEN_WIDTH/3; // the width of each square
+  line(0, gridWidth, SCREEN_WIDTH, gridWidth); // top horizontal line
+  line(0, 2*gridWidth, SCREEN_WIDTH, 2*gridWidth); // bottom horizontal line
+  line(gridWidth, 0, gridWidth, SCREEN_WIDTH); // left vertical line
+  line(2*gridWidth, 0, 2*gridWidth, SCREEN_WIDTH); // right vertical line
+}
+		</pre></code></b>
+		</div>
+	</body>
+</html>

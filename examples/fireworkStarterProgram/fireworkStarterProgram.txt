@@ -1,0 +1,135 @@
+int SCREEN_WIDTH=800;
+int SCREEN_HEIGHT=600;
+
+long startTime = System.currentTimeMillis();
+Firework firework;
+
+void setup()
+{
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  smooth();
+  
+  firework = new Firework(400, 1, 3, color(255,0,0));
+}
+
+void draw()
+{
+  // calculate the number of seconds since the program started (there are 1000 milliseconds in one second)
+  long seconds = (System.currentTimeMillis() - startTime)/1000;
+
+  // clear everything
+  background(0);
+  drawScenery();
+  
+  firework.draw(seconds);
+}
+
+void drawScenery()
+{
+  // full moon in the top left
+  fill(240);
+  stroke(240);
+  ellipse(80,80,60,60);
+
+  // unlit ground near the bottom
+  fill(40);
+  stroke(40);
+  rect(0, 5*SCREEN_HEIGHT/6, SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
+class Firework
+{
+  color FUSE_COLOR = color(200,95,0);
+  
+  float x;
+  int lightTime;
+  int launchTime;
+  color explosionColor;
+  
+  int r = 0;
+  int y = 5*SCREEN_HEIGHT/6;
+  int launchVelocity = -2;
+  int explosionVelocity = 4;
+  int explosionRadius = 150;
+  boolean fuseFlag = true; // changes on each draw to simulate a burning fuse
+  
+  // Create  firework
+  // x starting position: Must be between 0 and SCREEN_WIDTH
+  // lightTime: Time in seconds at which the fuse is lit
+  // fuseTime: Time in seconds for which the fuse burns
+  // explosion: Color of the firework explosion
+  Firework(float x, int lightTime, int fuseTime, color explosionColor)
+  {
+    this.x = x;
+    this.lightTime = lightTime;
+    this.explosionColor = explosionColor;
+    launchTime = lightTime + fuseTime;
+  }
+  
+  void draw(long seconds)
+  {
+    if (seconds < lightTime) {
+      return; // do nothing - we can't see the firework on the ground
+    }
+    
+    
+    if (y < SCREEN_HEIGHT/3) {
+      // firework is launching or on the groung
+      r += explosionVelocity;
+      if (r < explosionRadius) {
+        drawExplosion();
+      }
+    }
+    else {
+      // firework is launching or on the groung
+      if (seconds > launchTime) {
+        y += launchVelocity;
+      }
+      drawFuse();
+    }
+  }
+  
+  void drawExplosion()
+  {
+    stroke(explosionColor);
+    noFill();
+    float start = 0;
+    float delta = TWO_PI / 360.0; // one degree
+    int w = 6;
+    strokeWeight(w);
+
+    // outer explosion
+    while (start < TWO_PI) {
+      arc(x,y,r,r,start,start+delta);
+      start += 10*delta;
+    }
+    
+    // inner explosions
+    int innerDelta = 20;
+    int innerR = r;
+    while (innerR > 0 && w > 0) {
+      start = 0;
+      while (start < TWO_PI) {
+        strokeWeight(w);
+        arc(x,y,innerR,innerR,start,start+delta);
+        start += 10*delta;
+      }
+      --w;
+      innerR -= innerDelta;
+    }
+  }
+  
+  void drawFuse() {
+    stroke(FUSE_COLOR);
+    strokeWeight(1);
+    if (fuseFlag) {
+      line(x-2, y-2, x+2, y+2);
+      line(x-2, y+2, x+2, y-2);
+    }
+    else {
+      line(0, y-3, 0, y+3);
+      line(x-3, 0, x+3, 0);
+    }
+    fuseFlag = !fuseFlag; // ! changes false to true, true to false
+  }
+}

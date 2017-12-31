@@ -1,0 +1,35 @@
+// constants don't change value during the whole program
+// By convention we use capitals for these names
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
+int CIRCLE_WIDTH = 100;
+
+// setup() is a special function in Processing
+// it is called by Processing, only once at the start of the program
+void setup()
+{
+  // using constants instead of size(800,800) makes the program easier to understand
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  
+  // the smooth() function makes graphics draw more - well - smoothly
+  // it just takes a bit longer to draw them - but you usually won't notice
+  smooth();
+}
+
+// draw() is a special function in Processing
+// it is called by Processing, many times per second
+// every time the draw function draws, it is called a "frame"
+// use draw() to animate things in the processing window, by drawing something a little different in each frame
+void draw()
+{
+  // background(0) overwrites everything black, every time draw is called (each frame)
+  background(0);
+ 
+  // the circle will be red - we've done this before
+  fill(255,0,0); 
+ 
+  // mouseX and mouseY are Processing variables that hold the current mouse position
+  // ellipse(x,y,width,height) is used to draw an ellipse at (x,y) with the specified width and height
+  // an ellipse with the same width and height is a circle
+  ellipse(mouseX, mouseY, CIRCLE_WIDTH, CIRCLE_WIDTH);
+}

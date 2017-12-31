@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>JOG Programming Club Challenge : Firework Display</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<script language="javascript" src="/programmingclub/javascript/functions.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<img src="/programmingclub/img/club.png"/>
+		</div>
+			<div id="navigation">
+				<div class="navBar" id="mainnav_noSub">
+					<a href="/programmingclub/html/index.html" class="active">Welcome</a> \
+					<a href="/programmingclub/html/gallery.html">Gallery</a> \
+					<a href="/programmingclub/html/challenges.html">Challenges</a> \
+					<a href="/programmingclub/html/reference.html">Reference</a> \
+					<a href="/programmingclub/html/contact.html">Contact</a> \
+				</div>
+			</div>
+		</body>
+		<h1>Challenge - Firework Display</h1>
+		<h3>Objective</h3>
+		<p><b>Add a new type to describe multiple fireworks</b></p>
+
+		<h3>Task</h3>
+		<p>
+		<li><b>Easy:</b> Set off a display of 20 random fireworks</li>
+		<li><b>Medium:</b> Vary the explosion height and radius</li>
+		<li><b>Hard:</b> Make the diaplay carry on forever</li>
+		<p></p>
+		</p>
+		<h3>Tools</h3>
+		<p>
+		<p>The <a href="/programmingclub/examples/fireworkDisplayStarterProgram/fireworkDisplayStarterProgram.txt">
+		starter</a> program animates a random display of 10 fireworks.</p>
+		<p>This example is the same as the <a href="/programmingclub/solutions/fireworkMedium/fireworkMedium.txt">medium solution to the Firework challenge</a>, except that we have replaced lots of variables:</p>
+		<pre><code><b>
+// there are better ways to do this, but I have not really told you about them yet!
+Firework firework1;
+Firework firework2;
+Firework firework3;
+Firework firework4;
+Firework firework5;
+Firework firework6;
+Firework firework7;
+Firework firework8;
+Firework firework9;
+Firework firework10;
+		</pre></code></b>
+		<p>With a new type <b>FireworkDisplay</b>.  If you look at the code in FireworkDisplay you will see that we are using an array to store all of the fireworks:</p>
+		<pre><code><b>
+FireworkDisplay fireworkDisplay;
+...
+class FireworkDisplay
+{
+  Firework[] fireworks; // this is an array, it holds multiple objects
+...
+		</pre></code></b>
+		<p>You don't need to worry about how the array works to complete the challenge, but take a look later at the code in FireworkDisplay if you are interested...
+		<h4>Easy Challenge hints</h4>
+		<p>Pass a different number to the FireworkDisplay object that is created in the setup() function:</p>
+		<pre><code><b>
+void setup()
+{
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  smooth();
+
+  // create a display of <font color="green">10</font> random fireworks
+  fireworkDisplay = randomFireworkDisplay(<font color="green">10</font>);
+}
+
+		</pre></code></b>
+		<h4>Medium Challenge hints</h4>
+		<p>Try to follow the code to see how the fireworks are animated.  The explosion currently happens at a fixed height and radius:</p>
+		<pre><code><b>
+  int explosionRadius = 150;
+  int explosionHeight = SCREEN_HEIGHT/3;
+		</pre></code></b>
+		<p>Add new parameters to the Firework constructor like this, to set them on that particular Firework "object":</p>
+		<pre><code><b>
+	  Firework(float x, int lightTime, int fuseTime, color explosionColor, <font color="green">int explosionHeight, int explosionRadius</font>) {
+	  ...
+	  <font color="green">
+	  this.explosionHeight = explosionHeight;
+	  this.explosionRadius = explosionRadius;
+	  </font>
+		</pre></code></b>
+		<p>Set these new parameters from the calling code (more random values perhaps?) and see what happens...</p>
+		</pre></code></b>
+		<h4>Hard Challenge hints</h4>
+		Add a method to to the Firework type that let's us know that it is exploded:
+		<pre><code><b>
+boolean isExploded() ...
+		</pre></code></b>
+		In the draw() method check for exploded fireworks in the display and replace them with new ones.
+		<h3>Example <a id="displayText" href="javascript:toggle();">(Show)</a></h1>
+		<div id="toggleText" style="display: none">
+		<li>Easy challenge : Sorry no solutions for this one.  Ask me if you get stuck.</li>
+		<li>Medium challenge  : No solutions this week.  If you manage it let me know...</li>
+		<li>Hard challenge : No solutions this week.  If you manage it let me know...</a></li>
+		</div>
+	</body>
+</html>

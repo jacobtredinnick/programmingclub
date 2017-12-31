@@ -1,0 +1,58 @@
+int SCREEN_WIDTH=800;
+int SCREEN_HEIGHT=600;
+color BACKGROUND_COLOR = color(0); // black
+
+Snowflake snowFlake;
+
+void setup()
+{
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+  smooth();
+
+  snowFlake = new Snowflake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, 250);
+
+  float c = cos(0);
+  float y0 = SCREEN_HEIGHT/2 + c * 50;
+}
+
+void draw()
+{
+  drawBackground();
+  snowFlake.draw();
+}
+
+void drawBackground()
+{
+  background(BACKGROUND_COLOR);
+}
+
+class Snowflake {
+  // configurable
+  float x;
+  float y;
+  float innerRadius;
+  float outerRadius;
+  
+  // hard coded
+  color flakeColor = color(255); // what else?
+  
+  Snowflake(float x, float y, float innerRadius, float outerRadius)
+  {
+    this.x = x;
+    this.y = y;
+    this.innerRadius = innerRadius;
+    this.outerRadius = outerRadius;
+  }
+  
+  void draw()
+  {
+    // get ready to draw
+    stroke(flakeColor);
+    strokeWeight(innerRadius/10);
+    noFill();
+
+    // draw the inner circle
+    ellipse(x, y, 2*innerRadius, 2*innerRadius);
+  }
+}
+
